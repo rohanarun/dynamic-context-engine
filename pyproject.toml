@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jev-context-engine"
+version = "0.1.0"
+description = "Model-selected paragraph memory for Codex, Claude Code, Hermes, and any agent."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Rohan Arun"}]
+dependencies = []
+
+[project.optional-dependencies]
+demo = ["Flask>=3.0,<4", "gunicorn>=23,<24"]
+
+[project.scripts]
+jev-context = "jev_context.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["jev_context*"]
+
+[tool.setuptools.package-data]
+jev_context = ["policy.json"]

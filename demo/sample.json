@@ -1,0 +1,15 @@
+{
+  "name": "Orbit — a fictional product team's memory",
+  "description": "Sample context only. No private company or user data.",
+  "requests": [
+    "Draft a reply to a customer asking for a refund after 12 days.",
+    "Implement a keyboard-accessible dark mode toggle for the dashboard.",
+    "Plan the next production release and explain the rollback process.",
+    "What should I cook for dinner tonight?"
+  ],
+  "documents": [
+    {"source": "product.md", "text": "Orbit is a collaborative project planner for small creative teams. Its core promise is a calm shared view of the next milestone, owners, and blockers.\n\nOrbit's dashboard is built with React and TypeScript. Shared UI components live in src/ui. Use CSS custom properties for color and spacing; keep feature-specific state inside the feature.\n\nThe dashboard supports light and dark themes. Persist an explicit theme choice in localStorage; otherwise follow prefers-color-scheme. Avoid a flash of the wrong theme during initial page load.\n\nAll interactive controls must support keyboard navigation, visible focus, and accessible names. Toggle controls expose their state to assistive technology. Respect prefers-reduced-motion."},
+    {"source": "support.md", "text": "Refunds are available within 14 days of a customer's first paid subscription, as long as it is their first refund. Annual renewals and purchases older than 14 days require a support review; do not promise approval.\n\nBefore processing a refund, verify the purchase date and whether a previous refund exists. A support agent may explain eligibility but must obtain the customer's confirmation before cancelling their workspace subscription.\n\nCustomer replies should be warm, brief, and specific. Acknowledge the request, explain the next step, and avoid making guarantees before checking the account. Never include private billing data in a public response.\n\nOrbit's free plan supports three collaborators. The Team plan is $12 per collaborator per month. Enterprise pricing is negotiated with the sales team."},
+    {"source": "engineering.md", "text": "Production releases start from a reviewed pull request. Run the unit suite, type checks, and a staging smoke test before release. Database changes need a backwards-compatible migration.\n\nDeployments use versioned container images. Record the previous image tag before rollout. If error rates increase, restore that image and verify the health endpoint; do not reverse a database migration without an explicit recovery plan.\n\nThe notifications service sends a daily email digest at 09:00 in each workspace's timezone. Users can opt out from notification preferences. New integrations must honor that preference.\n\nThe team's offsite is in Lisbon in October. Travel arrangements are coordinated by operations, and attendees should submit dietary requirements one month before departure."}
+  ]
+}
