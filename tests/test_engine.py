@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
-from jev_context.engine import Engine, Store, JevClient, ProviderError
+from jev_context.engine import Engine, Store, JevClient, ProviderError, token_count
 
 class Client:
     model = "test-model"
@@ -37,6 +37,19 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(limited['context'], '')
         self.assertEqual(limited['paragraphs'][0]['selection_reason'], 'over_budget')
         self.assertLessEqual(limited['context_chars'], 10)
+    def test_token_default_and_exact_boundary(self):
+        self.store.ingest('refund café 日本語 <|endoftext|> ' * 500, 'notes')
+        full = self.engine.query('refund')
+        self.assertEqual(full['max_tokens'], 1_000_000)
+        self.assertEqual(full['token_encoding'], 'o200k_base')
+        self.assertEqual(full['context_tokens'], token_count(full['context']))
+        self.assertGreater(full['context_chars'], 12000)
+        self.assertEqual(full['selected_count'], 1)
+        self.assertEqual(self.engine.query('refund', max_tokens=full['context_tokens'])['selected_count'], 1)
+        self.assertEqual(self.engine.query('refund', max_tokens=full['context_tokens']-1)['selected_count'], 0)
+        for budget in [0, 1_000_001, True, 1.5]:
+            with self.assertRaises(ValueError): self.engine.query('refund', max_tokens=budget)
+
     def test_cache_rebudget_and_invalidation(self):
         self.store.ingest('refund policy', 'notes')
         self.engine.query('refund')

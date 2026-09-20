@@ -6,7 +6,7 @@ import threading
 import time
 from collections import deque
 from flask import Flask, jsonify, render_template, request
-from jev_context.engine import Engine, Store, ProviderError
+from jev_context.engine import Engine, Store, ProviderError, DEFAULT_MAX_TOKENS, MAX_CONTEXT_TOKENS
 
 HERE = Path(__file__).parent
 SAMPLE = json.loads((HERE / "sample.json").read_text())
@@ -44,11 +44,11 @@ def select():
         return jsonify(error="Enter a request between 1 and 2,000 characters."), 400
     try:
         threshold = float(payload.get("threshold", 0.5))
-        max_chars = int(payload.get("max_chars", 6000))
-        if not 0 <= threshold <= 1 or not 250 <= max_chars <= 20000:
+        max_tokens = payload.get("max_tokens", DEFAULT_MAX_TOKENS)
+        if not 0 <= threshold <= 1 or isinstance(max_tokens, bool) or not isinstance(max_tokens, int) or not 1 <= max_tokens <= MAX_CONTEXT_TOKENS:
             raise ValueError()
     except (TypeError, ValueError, OverflowError):
-        return jsonify(error="Threshold must be 0–1; budget must be 250–20,000 characters."), 400
+        return jsonify(error="Threshold must be 0–1; token budget must be an integer from 1 to 1,000,000."), 400
     with lock:
         now = time.monotonic()
         while requests_window and requests_window[0] < now-60:
@@ -59,7 +59,7 @@ def select():
     if not concurrency.acquire(blocking=False):
         return jsonify(error="All demo inference slots are busy. Please retry shortly."), 429
     try:
-        return jsonify(engine.query(query, "demo", threshold, max_chars))
+        return jsonify(engine.query(query, "demo", threshold, max_tokens=max_tokens))
     except ProviderError as exc:
         return jsonify(error=str(exc)), 502
     except ValueError as exc:

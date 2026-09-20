@@ -26,4 +26,4 @@ if __name__ == "__main__":
     if not args.path and not args.agent:
         parser.error("Choose --agent or --path")
     target = install(args.path or Path.home() / DESTINATIONS[args.agent], args.force)
-    print(f"Installed: {target}\nSet TYPESAFE_API_KEY in your agent environment, then invoke dynamic-context.")
+    print(f"Installed: {target}\nInstall dependencies with: python3 -m pip install -r {target}/requirements.txt\nSet TYPESAFE_API_KEY in your agent environment, then invoke dynamic-context.")

@@ -3,7 +3,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
-from .engine import Engine, Store, ProviderError
+from .engine import Engine, Store, ProviderError, DEFAULT_MAX_TOKENS
 
 def main():
     parser = argparse.ArgumentParser(description="Store paragraphs and select relevant context with Jev.")
@@ -16,7 +16,8 @@ def main():
     query = commands.add_parser("query", help="Judge every paragraph in the collection")
     query.add_argument("request", nargs="?", help="Omit to read from stdin")
     query.add_argument("--threshold", type=float, default=0.5)
-    query.add_argument("--max-chars", type=int, default=12000)
+    query.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_TOKENS, help="Context token budget, default/max 1,000,000 (o200k_base)")
+    query.add_argument("--max-chars", type=int, help="Optional additional legacy character cap")
     query.add_argument("--json", action="store_true")
     query.add_argument("--no-cache", action="store_true")
     query.add_argument("--policy", help="Custom model judgment policy JSON")
@@ -31,7 +32,7 @@ def main():
             print(json.dumps({"paragraphs": len(result), "collection": args.collection}))
         elif args.command == "query":
             policy = json.loads(Path(args.policy).read_text()) if args.policy else None
-            result = Engine(store, policy=policy, cache_ttl=0 if args.no_cache else 3600).query(args.request or sys.stdin.read(), args.collection, args.threshold, args.max_chars)
+            result = Engine(store, policy=policy, cache_ttl=0 if args.no_cache else 3600).query(args.request or sys.stdin.read(), args.collection, args.threshold, args.max_chars, max_tokens=args.max_tokens)
             print(json.dumps(result, ensure_ascii=False, indent=2) if args.json else result["context"])
         elif args.command == "list":
             print(json.dumps(store.list(args.collection), ensure_ascii=False, indent=2))

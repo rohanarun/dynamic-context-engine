@@ -1,4 +1,4 @@
-"""Dependency-free storage, Jev inference, and exact paragraph assembly."""
+"""Storage, Jev inference, and token-budgeted paragraph assembly."""
 from __future__ import annotations
 import hashlib
 import json
@@ -11,6 +11,15 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+
+DEFAULT_MAX_TOKENS = 1_000_000
+MAX_CONTEXT_TOKENS = 1_000_000
+TOKEN_ENCODING = "o200k_base"
+
+def token_count(text):
+    """Count reference tokens, including JSON provenance and delimiters."""
+    import tiktoken
+    return len(tiktoken.get_encoding(TOKEN_ENCODING).encode_ordinary(text))
 
 POLICY = json.loads(Path(__file__).with_name("policy.json").read_text())
 
@@ -107,13 +116,15 @@ class JevClient:
             raise ProviderError("Jev returned incomplete or invalid judgments. No partial selection was used.") from None
         return {"scores": scores, "usage": result.get("usage", {}), "model": result.get("model", self.model)}
 
-def assemble(rows, scores, threshold, max_chars):
+def assemble(rows, scores, threshold, max_chars=None, max_tokens=DEFAULT_MAX_TOKENS):
     selected, ranked, used = [], [], 0
     for paragraph in sorted(rows, key=lambda p: (-scores[p["id"]], p["source"], p["position"])):
         score = scores[paragraph["id"]]
         block = json.dumps({"id": paragraph["id"], "source": paragraph["source"], "paragraph": paragraph["position"]+1, "text": paragraph["text"]}, ensure_ascii=False)
         cost = len(block) + (1 if selected else 0)
-        reason = "below_threshold" if score < threshold else "selected" if used+cost <= max_chars else "over_budget"
+        fits_chars = max_chars is None or used+cost <= max_chars
+        fits_tokens = score >= threshold and fits_chars and token_count("\n".join(selected + [block])) <= max_tokens
+        reason = "below_threshold" if score < threshold else "selected" if fits_tokens else "over_budget"
         ranked.append({**paragraph, "relevance": score, "selected": reason == "selected", "selection_reason": reason})
         if reason == "selected":
             selected.append(block)
@@ -127,11 +138,13 @@ class Engine:
             raise ValueError("Batch size and workers must be positive.")
         self.store, self.client = store, client or JevClient()
         self.policy, self.batch_size, self.workers, self.cache_ttl = policy or POLICY, batch_size, workers, cache_ttl
-    def query(self, request, collection="default", threshold=0.5, max_chars=12000):
+    def query(self, request, collection="default", threshold=0.5, max_chars=None, *, max_tokens=DEFAULT_MAX_TOKENS):
         if not isinstance(request, str) or not request.strip():
             raise ValueError("Provide a nonempty request.")
-        if not math.isfinite(threshold) or not 0 <= threshold <= 1 or max_chars < 1:
+        if not math.isfinite(threshold) or not 0 <= threshold <= 1 or (max_chars is not None and max_chars < 1):
             raise ValueError("Threshold must be 0–1 and context budget must be positive.")
+        if isinstance(max_tokens, bool) or not isinstance(max_tokens, int) or not 1 <= max_tokens <= MAX_CONTEXT_TOKENS:
+            raise ValueError("Token budget must be an integer from 1 to 1,000,000.")
         start = time.perf_counter()
         rows = self.store.list(collection)
         fingerprint = hashlib.sha256(json.dumps([request, rows, self.policy, self.client.model, self.batch_size], sort_keys=True).encode()).hexdigest()
@@ -151,11 +164,12 @@ class Engine:
                         result["usage"][key] = result["usage"].get(key, 0) + value
             if rows and self.cache_ttl:
                 self.store.cache(fingerprint, result)
-        ranked, context = assemble(rows, result["scores"], threshold, max_chars)
+        ranked, context = assemble(rows, result["scores"], threshold, max_chars, max_tokens)
         return {"request": request, "collection": collection, "paragraphs": ranked, "context": context,
                 "selected_count": sum(p["selected"] for p in ranked), "total_count": len(rows),
                 "context_chars": len(context), "source_chars": sum(len(p["text"]) for p in rows),
-                "threshold": threshold, "max_chars": max_chars, "cached": cached,
+                "threshold": threshold, "max_chars": max_chars, "max_tokens": max_tokens,
+                "context_tokens": token_count(context), "token_encoding": TOKEN_ENCODING, "cached": cached,
                 "usage": {} if cached else result["usage"], "original_usage": result["usage"],
                 "models": result["models"], "policy_version": self.policy["version"],
                 "elapsed_ms": round((time.perf_counter()-start)*1000)}

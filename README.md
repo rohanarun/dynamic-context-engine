@@ -4,7 +4,7 @@
 
 [Live playground](https://getsupers.com/demos/context-engine/) · [TypeSafe API](https://docs.typesafe.ai/api) · [MIT license](LICENSE)
 
-Store project notes, preferences, or documentation in SQLite. At request time, Jev evaluates each paragraph's relevance, then the engine combines the useful paragraphs into a size-bounded, source-tagged context. No embeddings, vector database, keyword rules, or generative rewriting. The engine and CLI use only Python's standard library.
+Store project notes, preferences, or documentation in SQLite. At request time, Jev evaluates each paragraph's relevance, then the engine combines the useful paragraphs into a size-bounded, source-tagged context. No embeddings, vector database, keyword rules, or generative rewriting. The engine uses SQLite and tiktoken for explicit token budgeting.
 
 ## Quickstart
 
@@ -21,12 +21,12 @@ jev-context --collection my-project ingest notes.md --source project-notes
 jev-context --collection my-project query 'How should I deploy this service?' --json
 ```
 
-Or run `python3 -m jev_context` directly from this checkout without installing anything. Blank lines delimit paragraphs. Re-import the same source to replace it atomically; a different source adds another document.
+Or run `python3 -m jev_context` directly from this checkout after installing `tiktoken`. Blank lines delimit paragraphs. Re-import the same source to replace it atomically; a different source adds another document.
 
 ```sh
 jev-context --collection my-project list
 jev-context --collection my-project delete project-notes
-jev-context --collection my-project query --max-chars 6000 --threshold 0.5 <<'REQUEST'
+jev-context --collection my-project query --max-tokens 1000000 --threshold 0.5 <<'REQUEST'
 Draft the support response using our current refund policy.
 REQUEST
 ```
@@ -41,7 +41,7 @@ python3 install_skill.py --agent claude
 python3 install_skill.py --agent hermes
 ```
 
-Run only the commands for agents you use. Each installation contains its own engine and needs no pip dependencies. Existing skills are preserved unless `--force` is supplied. `--path` supports a custom or project-local skills directory.
+Run only the commands for agents you use. Each installation contains its own engine. Install the project first (`python3 -m pip install .`), or install the skill's `requirements.txt` with the same Python interpreter that runs it. Existing skills are preserved unless `--force` is supplied. `--path` supports a custom or project-local skills directory.
 
 | Agent | Installed location | Use |
 | --- | --- | --- |
@@ -49,7 +49,7 @@ Run only the commands for agents you use. Each installation contains its own eng
 | Claude Code | `~/.claude/skills/dynamic-context` | Invoke `/dynamic-context` |
 | Hermes | `~/.hermes/skills/dynamic-context` | Ask the agent to use the dynamic-context skill |
 
-A ready-to-copy [skill ZIP](https://github.com/rohanarun/dynamic-context-engine/releases/latest/download/dynamic-context-skill.zip) is also available. Extract its `dynamic-context` folder into your agent's skills directory. To rebuild it from source, run `python3 scripts/build_skill.py`.
+A ready-to-copy [skill ZIP](https://github.com/rohanarun/dynamic-context-engine/releases/latest/download/dynamic-context-skill.zip) is also available. Extract its `dynamic-context` folder into your agent's skills directory and run `python3 -m pip install -r /path/to/dynamic-context/requirements.txt`. To rebuild it from source, run `python3 scripts/build_skill.py`.
 
 The same [SKILL.md](skills/dynamic-context/SKILL.md) works across all three. Paths follow the official [Codex](https://developers.openai.com/codex/skills/), [Claude Code](https://code.claude.com/docs/en/skills), and [Hermes](https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills) skill conventions. Start a fresh agent session if its skill list does not refresh.
 
@@ -66,7 +66,7 @@ from jev_context import Engine, Store
 
 store = Store("./context.sqlite3")
 store.ingest("Our release policy...\n\nOur rollback procedure...", "operations", "project")
-result = Engine(store).query("Plan a release", collection="project", max_chars=6000)
+result = Engine(store).query("Plan a release", collection="project", max_tokens=1_000_000)
 # Attach result["context"] as reference data alongside the current user request.
 ```
 
@@ -76,10 +76,10 @@ The agent wrapper owns the final model call. This library does not require an Op
 
 1. Read every paragraph in the requested collection. There is no silent shortlist that could miss a differently worded match.
 2. Send batches to Jev, with one independent Noul question per paragraph and an explicit [relevance policy](jev_context/policy.json). Each Noul is an estimated probability that the paragraph materially helps with the request.
-3. Rank by those judgments. Include paragraphs above the adjustable cutoff while respecting the character budget; retain complete paragraphs and provenance. A relevant paragraph that does not fit is marked `over_budget`.
+3. Rank by those judgments. Include paragraphs above the adjustable cutoff while respecting the token budget; retain complete paragraphs and provenance. A relevant paragraph that does not fit is marked `over_budget`.
 4. Emit JSON Lines. Paragraph contents are escaped data, so embedded delimiter text cannot break the payload structure.
 
-Default cutoff: 0.5. This is an adjustable starting point, not a domain-calibrated guarantee. Character budgets include JSON source metadata and separators, and are not token budgets. Relevant paragraphs may be excluded by the budget. Review selected/omitted rows when completeness matters. No summaries or dependency graph are inferred during assembly.
+Default cutoff: 0.5. This is an adjustable starting point, not a domain-calibrated guarantee. The default and maximum budget is **1,000,000 tokens**, counted with tiktoken's `o200k_base` encoding over the assembled JSON Lines including provenance and separators. This reference tokenizer can differ from the receiving agent's tokenizer; the limit does not increase a provider's own context window. `--max-tokens` controls the budget; `--max-chars` remains an optional additional legacy character cap. The first tokenization downloads the public encoding data and caches it locally. Relevant paragraphs may be excluded by the budget. Review selected/omitted rows when completeness matters. No summaries or dependency graph are inferred during assembly.
 
 Identical request/corpus/policy/model-alias/batch combinations reuse judgments for one hour; changing the budget or cutoff reuses the same scores. `--no-cache` forces a provider call. Re-importing data invalidates the fingerprint. A provider alias can change within the cache window; inspect the returned actual model version or disable caching when comparing models.
 

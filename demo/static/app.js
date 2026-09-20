@@ -11,7 +11,7 @@ function result(data) {
   $('empty').hidden = true;
   $('selected').hidden = false;
   $('selected').innerHTML = data.paragraphs.filter(p => p.selected).map(p => `<div class="selected-block"><div class="paragraph-top"><span>${escape(p.source)} · paragraph ${p.position+1}</span><span>${Math.round(p.relevance*100)}%</span></div><p>${escape(p.text)}</p></div>`).join('') || '<div class="empty"><h4>No paragraphs selected.</h4><p>No sample paragraph met both the relevance cutoff and available budget. Try a different request or adjust the controls.</p></div>';
-  $('context-size').textContent = data.context_chars.toLocaleString();
+  $('context-size').textContent = data.context_tokens.toLocaleString();
   $('result-caption').textContent = `${data.selected_count} of ${data.total_count} paragraphs selected`;
   $('raw').textContent = data.context || '(Empty context)';
   $('copy').disabled = !data.context;
@@ -21,7 +21,7 @@ function result(data) {
 }
 function install(agent) {
   const paths = {codex:'~/.agents/skills',claude:'~/.claude/skills',hermes:'~/.hermes/skills'};
-  $('install-code').textContent = `git clone https://github.com/rohanarun/dynamic-context-engine.git\ncd dynamic-context-engine\npython3 install_skill.py --agent ${agent}\n\n# Installs to ${paths[agent]}/dynamic-context`;
+  $('install-code').textContent = `git clone https://github.com/rohanarun/dynamic-context-engine.git\ncd dynamic-context-engine\npython3 -m pip install .\npython3 install_skill.py --agent ${agent}\n\n# Installs to ${paths[agent]}/dynamic-context`;
   document.querySelectorAll('[data-agent]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.agent===agent)));
 }
 async function start() {
@@ -40,7 +40,7 @@ $('query-form').addEventListener('submit', async event => {
   $('status').textContent = 'Jev is evaluating each sample paragraph against your request…';
   $('query-form').setAttribute('aria-busy','true');
   try {
-    const response = await fetch(`${base}/api/select`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({request:$('request').value,threshold:Number($('threshold').value),max_chars:Number($('budget').value)})});
+    const response = await fetch(`${base}/api/select`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({request:$('request').value,threshold:Number($('threshold').value),max_tokens:Number($('budget').value)})});
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'The request could not be completed. Please retry.');
     result(data);
