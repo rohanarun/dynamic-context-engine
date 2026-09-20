@@ -2,6 +2,7 @@
 """Render public benchmark data into responsive charts and the demo section.
 Run with Python + matplotlib. No provider calls or private prompt data required.
 """
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -31,6 +32,9 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'svg.fonttype':'
 # Both variants preserve a common zero baseline and the same numeric scale.
 for mobile in [False,True]:
     fig,ax=plt.subplots(figsize=(4.5,13.8) if mobile else (12.8,7.6),facecolor=paper)
+    fig.suptitle(f'{100*saved/total_full:.1f}% less generation input\n{saved:,} tokens removed', fontsize=13 if mobile else 22, fontweight='bold', color=ink, y=.98)
+    retained=sum(v['required_retained'] for v in variants); required=sum(v['required_total'] for v in variants)
+    fig.text(.5,.935 if mobile else .855,f'{len(rows)} archived requests · {retained}/{required} required paragraphs retained\nAfter Jev: {100*(before-after)/before:.1f}% estimated net input-cost savings',ha='center',va='top',fontsize=8 if mobile else 10,color=ink)
     ax.set_facecolor(paper)
     pitch=1.48 if mobile else 1.0
     y=[i*pitch for i in range(len(rows))]
@@ -50,20 +54,22 @@ for mobile in [False,True]:
     ax.set_ylim(y[-1]+(.85 if mobile else .65),-.95 if mobile else -.7)
     if mobile:
         ax.set_yticks([])
-        fig.subplots_adjust(left=.06,right=.98,top=.96,bottom=.065)
+        fig.subplots_adjust(left=.06,right=.98,top=.835,bottom=.065)
     else:
         ax.set_yticks(y,labels=[textwrap.fill(label,26) for label in labels],color=ink,fontsize=10)
         ax.tick_params(axis='y',length=0,pad=15)
-        fig.subplots_adjust(left=.23,right=.97,top=.90,bottom=.12)
+        fig.subplots_adjust(left=.23,right=.97,top=.75,bottom=.12)
     ax.set_xticks([0,10000,20000,30000])
     ax.xaxis.set_major_formatter(FuncFormatter(lambda x,_:f'{int(x/1000)}k' if x else '0'))
     ax.tick_params(axis='x',length=0,labelcolor=muted,pad=10)
     ax.grid(axis='x',color='#e0e5d8',linewidth=.8,zorder=0)
     ax.set_xlabel('Generation input tokens · o200k_base',color=muted,labelpad=16,fontsize=9)
-    ax.legend(loc='upper left',bbox_to_anchor=(0,1.04 if mobile else 1.10),ncol=1 if mobile else 2,frameon=False,fontsize=9,labelcolor=ink)
+    fig.legend(*ax.get_legend_handles_labels(),loc='upper left',bbox_to_anchor=(.06 if mobile else .23,.885 if mobile else .81),ncol=1 if mobile else 2,frameon=False,fontsize=9,labelcolor=ink)
     name='benchmark-context-mobile' if mobile else 'benchmark-context'
     fig.savefig(ASSETS/f'{name}.svg',facecolor=paper)
     fig.savefig(ASSETS/f'{name}.png',dpi=180,facecolor=paper)
+    svg_path=ASSETS/f'{name}.svg'
+    svg_path.write_text('\n'.join(line.rstrip() for line in svg_path.read_text().splitlines())+'\n')
     plt.close(fig)
 
 trs='\n'.join(f'<tr><th scope="row"><a href="{html.escape(r["url"])}" target="_blank" rel="noreferrer">{html.escape(label)}</a></th><td>{a:,}</td><td>{b:,}</td><td>{pct:.1f}%</td></tr>' for r,label,a,b,pct in zip(rows,labels,full,selected,reductions))
@@ -77,5 +83,7 @@ section='''<section id="benchmarks" class="benchmarks" aria-labelledby="benchmar
 </section>'''
 for key,value in {'REDUCTION':f'{100*saved/total_full:.1f}%','FULL':f'{total_full:,}','SELECTED':f'{total_selected:,}','SAVED':f'{saved:,}','MINIMUM':f'{min(reductions):.1f}%','MAXIMUM':f'{max(reductions):.1f}%','BEFORE':f'{before:.5f}','AFTER':f'{after:.5f}','NET':f'{100*(before-after)/before:.1f}%','ROWS':trs}.items():
     section=section.replace(key,value)
+asset_version=hashlib.sha256((ASSETS/'benchmark-context.svg').read_bytes()).hexdigest()[:12]
+section=section.replace('.svg"',f'.svg?v={asset_version}"').replace('.png"',f'.png?v={asset_version}"')
 (ROOT/'demo/templates/benchmark.html').write_text(section+'\n')
 print(json.dumps({'cases':len(rows),'full_tokens':total_full,'dynamic_tokens':total_selected,'removed_tokens':saved,'reduction_percent':100*saved/total_full}))

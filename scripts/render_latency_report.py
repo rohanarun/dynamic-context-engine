@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Render measured latency JSON; never issue provider requests."""
+import hashlib
 import argparse
 import json
 from pathlib import Path
@@ -18,9 +19,12 @@ summary=r['retrieval_summary'];warm=r['warm_summary'];answers=r['answer_summary'
 labels={'sample-12':'Demo memory · 12 paragraphs','qa-71':'Question corpus · 71 paragraphs','website-prompt-78':'Website prompt · 78 paragraphs'}
 ink='#192322';paper='#fdfef9';palette=['#c6ccbf','#90a37a','#4d7034']
 plt.rcParams.update({'font.family':'DejaVu Sans','svg.fonttype':'path','axes.spines.top':False,'axes.spines.right':False,'axes.spines.left':False,'axes.spines.bottom':False})
+seq=summary['website-prompt-78']['1']['median_ms'];new=summary['website-prompt-78']['8']['median_ms']
 for mobile in [False,True]:
  fig,ax=plt.subplots(figsize=(4.5,8.9) if mobile else (11,6.8),facecolor=paper);ax.set_facecolor(paper)
- fig.subplots_adjust(left=.09 if mobile else .31,right=.96,top=.88,bottom=.13)
+ fig.suptitle(f'{seq/new:.0f}× faster context retrieval\n{seq/1000:.2f}s → {new/1000:.2f}s median', fontsize=13 if mobile else 22, fontweight='bold', color=ink, y=.98)
+ fig.text(.5,.89 if mobile else .845,'Website prompt · 1 versus 8 workers\nAll 78 paragraphs judged · complete-answer latency was mixed',ha='center',va='top',fontsize=7.5 if mobile else 10,color=ink)
+ fig.subplots_adjust(left=.09 if mobile else .31,right=.96,top=.73 if mobile else .70,bottom=.13)
  positions=[];names=[];maximum=max(v['p95_ms'] for d in summary.values() for v in d.values())/1000
  for i,(dataset,values) in enumerate(summary.items()):
   center=i*(2.6 if mobile else 1.6)
@@ -36,10 +40,13 @@ for mobile in [False,True]:
  ax.tick_params(axis='y',length=0,pad=15);ax.tick_params(axis='x',length=0,labelsize=9)
  ax.invert_yaxis();ax.set_xlim(0,maximum*1.24);ax.grid(axis='x',color='#e0e5d8',zorder=0)
  ax.set_xlabel('Retrieval seconds · lower is faster',labelpad=18,fontsize=9,color=ink)
- ax.legend(loc='upper left',bbox_to_anchor=(0,1.14 if mobile else 1.12),ncol=1 if mobile else 3,frameon=False,fontsize=9)
+ fig.legend(*ax.get_legend_handles_labels(),loc='upper left',bbox_to_anchor=(.09 if mobile else .31,.815 if mobile else .775),ncol=3,frameon=False,fontsize=8 if mobile else 9)
  if mobile:ax.set_ylim(positions[-1]+.85,-1.2)
  name='benchmark-latency-mobile' if mobile else 'benchmark-latency'
- for ext in ['svg','png']:fig.savefig(ROOT/'demo/static'/f'{name}.{ext}',facecolor=paper,dpi=180)
+ for ext in ['svg','png']:
+  path=ROOT/'demo/static'/f'{name}.{ext}'
+  fig.savefig(path,facecolor=paper,dpi=180)
+  if ext=='svg':path.write_text('\n'.join(line.rstrip() for line in path.read_text().splitlines())+'\n')
  plt.close(fig)
 
 full=answers['full'];dynamic=answers['dynamic'];pair_delta=statistics.median(r['paired_delta_ms'])
@@ -132,5 +139,7 @@ section=f'''<section id="latency" class="benchmarks" aria-labelledby="latency-ti
 <details class="benchmark-table"><summary>Inspect median and tail retrieval times</summary><div class="benchmark-table-scroll"><table><thead><tr><th scope="col">Corpus</th><th scope="col">Workers</th><th scope="col">Median</th><th scope="col">P95</th></tr></thead><tbody>{html_rows}</tbody></table></div></details>
 <div class="benchmark-links"><a href="{url}" target="_blank" rel="noreferrer">Read timing protocol and every paired result ↗</a><a href="{{{{ base }}}}/assets/benchmark-latency.png" download>Download latency graph ↓</a></div>
 </section>'''
+asset_version=hashlib.sha256((ROOT/'demo/static/benchmark-latency.svg').read_bytes()).hexdigest()[:12]
+section=section.replace('.svg"',f'.svg?v={asset_version}"').replace('.png"',f'.png?v={asset_version}"')
 (ROOT/'demo/templates/latency.html').write_text(section+'\n')
 print(json.dumps({'website_sequential_ms':seq,'website_default_ms':new,'old_default_ms':old,'end_to_end':answers,'median_paired_delta_ms':pair_delta},indent=2))
