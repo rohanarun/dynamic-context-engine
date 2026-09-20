@@ -5,6 +5,7 @@ Author: **Rohan Arun, Super Powers AI**.
 This is a pre-submission technical manuscript, not an arXiv publication. It includes the original 32-question accuracy result, the post-selected 29-question rerun, website-prompt replay, selector cost, and parallel/end-to-end timing.
 
 - [Read the PDF](../output/pdf/dynamic-context-engine-white-paper.pdf)
+- [Read the hosted PDF on getsupers.com](https://getsupers.com/demos/context-engine/assets/dynamic-context-engine-white-paper.pdf)
 - [LaTeX source](main.tex)
 - [arXiv source archive](../output/dynamic-context-engine-arxiv-source.tar.gz)
 - [Evidence manifest](evidence-manifest.json)
