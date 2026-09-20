@@ -1,0 +1,10 @@
+{
+  "observed_date": "2026-09-20",
+  "generation_model": "google/gemini-3.8-flash",
+  "generation_input_per_million": 0.75,
+  "generation_cached_input_per_million": 0.075,
+  "jev_input_per_million": 0.042,
+  "jev_output_per_million": 0,
+  "sources": ["https://ai.google.dev/gemini-api/docs/pricing", "https://openrouter.ai/google/gemini-3.8-flash", "https://docs.typesafe.ai/models"],
+  "notes": "Current public Gemini standard promotional prices, not proof of an individual BYOK invoice. Cache scenarios assume hits for system context only; request tokens remain uncached. Cache storage/write fees excluded. Jev uses measured provider input usage; generation estimates use o200k_base reference counts, not Gemini billing-token counts."
+}

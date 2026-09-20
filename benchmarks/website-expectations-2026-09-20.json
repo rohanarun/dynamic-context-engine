@@ -1,0 +1,16 @@
+{
+  "system_sha256": "8581d6ad52a39de95a9787971ada8ccbd2230ba1c0fa657f0d68947b04bbe457",
+  "annotation_method": "Human-readable prompt reviewed before retrieval results. These ten exact paragraphs express cross-site constraints that should survive context selection; retention is a necessary check, not proof of generation quality. Positions are zero-based.",
+  "required_positions": [
+    {"position": 0, "requirement": "Complete standalone HTML, working interaction, accessible responsive output, metadata"},
+    {"position": 3, "requirement": "Correct canonical and social-card metadata before publication"},
+    {"position": 20, "requirement": "Safe DOM handling, no source-instruction execution, robust runtime initialization"},
+    {"position": 23, "requirement": "Production SEO and accessibility requirements"},
+    {"position": 61, "requirement": "Contextual footer and measurement contract"},
+    {"position": 65, "requirement": "Latest reusable functional-tool direction overrides older guidance"},
+    {"position": 69, "requirement": "Latest striking visual-tool art direction"},
+    {"position": 74, "requirement": "Actual computation, useful results, validation and error handling"},
+    {"position": 75, "requirement": "Lazy runtime/model loading, honest processing state, scoped storage"},
+    {"position": 76, "requirement": "Final public slug and reply identity contract"}
+  ]
+}
