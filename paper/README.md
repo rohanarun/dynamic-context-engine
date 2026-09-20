@@ -11,19 +11,6 @@ This is a pre-submission technical manuscript, not an arXiv publication. It incl
 - [Evidence manifest](evidence-manifest.json)
 - [Submission metadata](submission-metadata.json)
 
-## Build
-
-From the repository root:
-
-```sh
-python3 paper/build_figures.py
-cd paper
-tectonic --keep-logs --outdir ../output/pdf main.tex
-cp ../output/pdf/main.pdf ../output/pdf/dynamic-context-engine-white-paper.pdf
-```
-
-Alternatively, use a standard LaTeX installation and run `pdflatex main.tex` twice from `paper/`. The source uses standard packages, PNG figures, and an inline bibliography; no private data, external commands, custom fonts, or API credentials are required to compile it. Local compilation was verified with Tectonic. arXiv server compilation still needs verification during submission.
-
 ## Submission status
 
 No arXiv identifier or submission receipt has been issued. The inspected arXiv account page requires login. The author must review the manuscript and confirm the submission license and arXiv agreement. The suggested subject is `cs.CL` (Computation and Language), with `cs.IR` (Information Retrieval) as a possible cross-list subject to arXiv moderation. Endorsement may be required by the account/category.
