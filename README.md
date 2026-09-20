@@ -125,6 +125,8 @@ Contributions are welcome through issues and pull requests. Keep credentials, lo
 
 [Eight real archived website requests](benchmarks/website-replay-2026-09-20.md): at the default cutoff, generation-input tokens fell **14.8%**, but estimated net input cost fell only **2.7%** after Jev. All 80 pre-registered required-paragraph checks passed. A higher cutoff saved more but dropped required context; cached-prompt comparisons were more expensive. This is an input-only replay, not proof of equivalent generated output or invoice savings. The report includes a reusable harness, public result data, price sources, and limitations.
 
+![Full versus selected generation-input tokens for eight website requests: 14.8% fewer input tokens.](demo/static/benchmark-context.png)
+
 The [live results chart](https://getsupers.com/demos/context-engine/#benchmarks) compares each request and includes a downloadable PNG and accessible data table. Regenerate its desktop/mobile SVG and PNG assets and HTML from the public result JSON without provider calls:
 
 ```sh
@@ -137,6 +139,8 @@ python3 scripts/render_benchmark_chart.py
 [32 frozen questions](benchmarks/question-accuracy-2026-09-20.md) over public text from eight generated sites and the sample team memory: full context scored **32/32**, dynamic context **29/32 (90.6%)**, and no context **9/32**. Dynamic selection removed **96.0% of answer-model input tokens**, but lost three answers that needed multiple facts or exact calculation inputs. On answerable questions alone, dynamic scored **20/23 (87.0%)**. All nine missing-information checks passed.
 
 This is a separate question-answering corpus, not the website-generation prompt benchmark above. It measures fidelity to frozen source text, not regenerated website quality. The public fixture includes questions, gold answers, and supporting quotes; the report includes every answer, omissions, uncertainty, provider usage, and reproduction instructions. [View the live comparison](https://getsupers.com/demos/context-engine/#accuracy).
+
+![Answer accuracy and average input tokens: full context 100%, dynamic context 90.6%, and no-context control 28.1%.](demo/static/benchmark-accuracy.png)
 
 ## Parallel retrieval and timing
 
@@ -151,3 +155,7 @@ jev-context query "Your complete request" --workers 1 --no-cache --json
 `JEV_CONTEXT_WORKERS` and `JEV_CONTEXT_BATCH_SIZE` set deployment defaults. Explicit CLI/Python parameters take precedence. `timing_ms` separates setup, provider inference, cache writing, assembly, and total time. `execution` reports batch coverage, observed peak overlapping calls, and batch intervals. Cache hits report zero dispatched calls. Total time includes local work; per-batch times include HTTP transport and provider processing and are not pure model-inference times.
 
 The worker limit is per query: a server allowing three simultaneous queries can issue up to 24 concurrent provider calls with the default settings. Tune concurrency to provider quota; adding workers cannot remove network latency, tokenization, or downstream model time. [Measured cold/warm and end-to-end latency](benchmarks/latency-2026-09-20.md) is also on the [live demo](https://getsupers.com/demos/context-engine/#latency).
+
+![Cold retrieval latency with one, three, and eight workers across three context corpora. Bars show medians; dots show P95.](demo/static/benchmark-latency.png)
+
+For the website prompt, median retrieval fell from **3.82s sequential to 0.76s with eight workers**. Complete-answer timing remained mixed: dynamic median **2.90s vs 3.03s**, but P95 **11.26s vs 3.56s**, with accuracy **11/12 vs 12/12**. These small samples do not establish a latency or accuracy guarantee.

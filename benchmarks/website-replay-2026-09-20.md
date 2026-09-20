@@ -4,6 +4,8 @@
 
 This is a replay of the eight newest completed generation archive records at capture, with their exact saved system prompts and user requests. All eight existing sites returned HTTP 200 and matching titles. The benchmark never regenerated, modified, deployed, or posted a website.
 
+![Full versus selected generation-input tokens for all eight website requests.](../demo/static/benchmark-context.png)
+
 ## Default selection results
 
 | Existing generated site | Full input tokens | Dynamic input tokens | Tokens removed | Net USD saved | Required paragraphs |
