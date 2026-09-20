@@ -83,7 +83,7 @@ Default cutoff: 0.5. This is an adjustable starting point, not a domain-calibrat
 
 Identical request/corpus/policy/model-alias/batch combinations reuse judgments for one hour; changing the budget or cutoff reuses the same scores. `--no-cache` forces a provider call. Re-importing data invalidates the fingerprint. A provider alias can change within the cache window; inspect the returned actual model version or disable caching when comparing models.
 
-Cost grows with the full collection. Use focused collections for larger corpora. `Engine(batch_size=12, workers=3)` controls inference batching and concurrency. This release is designed for project memory, not a million-document search engine.
+Cost grows with the full collection. Use focused collections for larger corpora. `Engine(store, batch_size=12, workers=8)` controls inference batching and concurrency. This release is designed for project memory, not a million-document search engine.
 
 ## Storage and privacy
 
@@ -137,3 +137,17 @@ python3 scripts/render_benchmark_chart.py
 [32 frozen questions](benchmarks/question-accuracy-2026-09-20.md) over public text from eight generated sites and the sample team memory: full context scored **32/32**, dynamic context **29/32 (90.6%)**, and no context **9/32**. Dynamic selection removed **96.0% of answer-model input tokens**, but lost three answers that needed multiple facts or exact calculation inputs. On answerable questions alone, dynamic scored **20/23 (87.0%)**. All nine missing-information checks passed.
 
 This is a separate question-answering corpus, not the website-generation prompt benchmark above. It measures fidelity to frozen source text, not regenerated website quality. The public fixture includes questions, gold answers, and supporting quotes; the report includes every answer, omissions, uncertainty, provider usage, and reproduction instructions. [View the live comparison](https://getsupers.com/demos/context-engine/#accuracy).
+
+## Parallel retrieval and timing
+
+The engine judges the whole selected collection in batches of 12 independent Jev questions, with up to **8 concurrent HTTP calls per query** by default. Every paragraph is evaluated; concurrency does not create a shortlist or alter the relevance policy. Calls are bounded at 32 workers, and requests with fewer batches use fewer workers. Failed batches raise an error without emitting or caching partial context.
+
+```sh
+jev-context query "Your complete request" --workers 8 --batch-size 12 --json
+# Compare sequential execution without reusing cached judgments:
+jev-context query "Your complete request" --workers 1 --no-cache --json
+```
+
+`JEV_CONTEXT_WORKERS` and `JEV_CONTEXT_BATCH_SIZE` set deployment defaults. Explicit CLI/Python parameters take precedence. `timing_ms` separates setup, provider inference, cache writing, assembly, and total time. `execution` reports batch coverage, observed peak overlapping calls, and batch intervals. Cache hits report zero dispatched calls. Total time includes local work; per-batch times include HTTP transport and provider processing and are not pure model-inference times.
+
+The worker limit is per query: a server allowing three simultaneous queries can issue up to 24 concurrent provider calls with the default settings. Tune concurrency to provider quota; adding workers cannot remove network latency, tokenization, or downstream model time. [Measured cold/warm and end-to-end latency](benchmarks/latency-2026-09-20.md) is also on the [live demo](https://getsupers.com/demos/context-engine/#latency).

@@ -5,7 +5,7 @@ const escape = text => String(text).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':
 function paragraphs(rows, judged=false) {
   $('paragraphs').innerHTML = rows.map(p => `<div class="paragraph ${p.selected ? 'is-selected' : ''}"><div class="paragraph-top"><span>${escape(p.source)} · paragraph ${p.position+1}</span><span>${judged ? `${Math.round(p.relevance*100)}% relevant` : 'Not evaluated'}</span></div><p>${escape(p.text)}</p>${judged ? `<div class="score-track"><span style="width:${p.relevance*100}%"></span></div><span class="badge">${p.selected ? 'Included' : p.selection_reason === 'over_budget' ? 'Relevant · over budget' : 'Below cutoff'}</span>` : ''}</div>`).join('');
 }
-function result(data) {
+function result(data, roundTripMs) {
   lastResult = data;
   paragraphs(data.paragraphs, true);
   $('empty').hidden = true;
@@ -17,6 +17,22 @@ function result(data) {
   $('copy').disabled = !data.context;
   $('status').className = 'status';
   $('status').textContent = `${data.cached ? 'Cached Jev judgments' : 'Live Jev judgments'} · ${data.models.join(', ') || 'No model call needed'} · ${data.elapsed_ms.toLocaleString()} ms · ${data.selected_count} selected${data.usage.input_tokens !== undefined ? ` · ${data.usage.input_tokens.toLocaleString()} input tokens` : ''}`;
+  if (data.execution && data.timing_ms) {
+    $('timing-details').hidden = false;
+    const e = data.execution, t = data.timing_ms;
+    $('timing-breakdown').textContent = [
+      `Browser round trip: ${roundTripMs.toLocaleString()} ms`,
+      `Server retrieval: ${t.total.toFixed(1)} ms`,
+      `  Database / cache lookup: ${t.setup.toFixed(1)} ms`,
+      `  Jev calls (wall time): ${t.inference.toFixed(1)} ms`,
+      `  Cache write: ${t.cache_write.toFixed(1)} ms`,
+      `  Context assembly: ${t.assembly.toFixed(1)} ms`,
+      `Jev calls dispatched: ${e.batches_dispatched} · peak overlapping: ${e.peak_parallel_batches} · worker limit: ${e.workers_limit}`,
+      `Paragraphs judged now: ${e.paragraphs_judged} / ${data.total_count}`,
+      data.cached ? 'Reused cached scores; no new Jev calls.' : `${e.batch_size} paragraphs per batch; every paragraph in this collection was judged.`,
+      'Round trip includes network and server time. Retrieval finishes before an agent can answer.'
+    ].join('\n');
+  }
   if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.from('.selected-block', {y:12,opacity:0,duration:.45,stagger:.08});
 }
 function install(agent) {
@@ -39,11 +55,12 @@ $('query-form').addEventListener('submit', async event => {
   $('status').className = 'status';
   $('status').textContent = 'Jev is evaluating each sample paragraph against your request…';
   $('query-form').setAttribute('aria-busy','true');
+  const requestStarted = performance.now();
   try {
     const response = await fetch(`${base}/api/select`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({request:$('request').value,threshold:Number($('threshold').value),max_tokens:Number($('budget').value)})});
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'The request could not be completed. Please retry.');
-    result(data);
+    result(data, Math.round(performance.now() - requestStarted));
   } catch(error) { $('status').className='status error'; $('status').textContent=`${error.message}${lastResult ? ' The panels still show the previous successful result.' : ''}`; }
   finally { $('run').disabled=false; $('query-form').setAttribute('aria-busy','false'); }
 });

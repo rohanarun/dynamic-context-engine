@@ -20,6 +20,8 @@ def main():
     query.add_argument("--max-chars", type=int, help="Optional additional legacy character cap")
     query.add_argument("--json", action="store_true")
     query.add_argument("--no-cache", action="store_true")
+    query.add_argument("--workers", type=int, help="Concurrent Jev batches, 1–32; default 8 or JEV_CONTEXT_WORKERS")
+    query.add_argument("--batch-size", type=int, help="Paragraphs per Jev call; default 12 or JEV_CONTEXT_BATCH_SIZE")
     query.add_argument("--policy", help="Custom model judgment policy JSON")
     commands.add_parser("list")
     delete = commands.add_parser("delete")
@@ -32,7 +34,7 @@ def main():
             print(json.dumps({"paragraphs": len(result), "collection": args.collection}))
         elif args.command == "query":
             policy = json.loads(Path(args.policy).read_text()) if args.policy else None
-            result = Engine(store, policy=policy, cache_ttl=0 if args.no_cache else 3600).query(args.request or sys.stdin.read(), args.collection, args.threshold, args.max_chars, max_tokens=args.max_tokens)
+            result = Engine(store, policy=policy, workers=args.workers, batch_size=args.batch_size, cache_ttl=0 if args.no_cache else 3600).query(args.request or sys.stdin.read(), args.collection, args.threshold, args.max_chars, max_tokens=args.max_tokens)
             print(json.dumps(result, ensure_ascii=False, indent=2) if args.json else result["context"])
         elif args.command == "list":
             print(json.dumps(store.list(args.collection), ensure_ascii=False, indent=2))

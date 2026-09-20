@@ -140,7 +140,7 @@ def main():
     store=Store(args.output/'memory.sqlite3')
     for d in fixture['documents']:
         store.ingest(d['text'],d['source'],'qa-benchmark')
-    engine=Engine(store,cache_ttl=0)
+    engine=Engine(store,workers=3,cache_ttl=0)
     paragraphs=store.list('qa-benchmark')
     # Match the engine's JSONL format and deterministic source order in the full arm.
     _,full=assemble(paragraphs,{r['id']:1 for r in paragraphs},0,max_tokens=1_000_000)

@@ -43,7 +43,7 @@ def main():
     report={'observed_at':datetime.now(timezone.utc).isoformat(),'token_encoding':'o200k_base',
             'selection_rule':cases['selection_rule'],'rates':rates,'expectations':expectations,
             'scope':'Input-only replay; original requests unchanged. No generation output, reasoning, retries, tool calls, or quality equivalence measured. Provider billing tokens may differ from o200k_base.', 'rows':[]}
-    engine=Engine(store)
+    engine=Engine(store, workers=3)
     for case in cases['cases']:
         collection=case['id']
         records=store.ingest(case['system'],'website-generation-prompt',collection)
