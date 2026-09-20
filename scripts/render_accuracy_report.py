@@ -14,21 +14,32 @@ from benchmarks.question_accuracy import summarize
 
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--results',type=Path,default=ROOT/'benchmarks/results/question-accuracy-2026-09-20.json')
+p.add_argument('--revision-fixture', type=Path, help='Describe a revised subset and preserve the original report/assets')
 a=p.parse_args()
+revision_fixture=json.loads(a.revision_fixture.read_text()) if a.revision_fixture else None
+report_stem='question-accuracy-2026-09-20-revised' if revision_fixture else 'question-accuracy-2026-09-20'
+asset_stem='benchmark-accuracy-revised' if revision_fixture else 'benchmark-accuracy'
+fixture_name=a.revision_fixture.name if revision_fixture else 'question-answering-2026-09-20.json'
 r=json.loads(a.results.read_text()); s=summarize(r['rows']); n=len(r['rows'])
 assert s==r['summary']
+if revision_fixture:
+    assert {x['id'] for x in r['rows']} == {x['id'] for x in revision_fixture['cases']}
+    import hashlib
+    assert r['protocol']['fixture_sha256'] == hashlib.sha256(a.revision_fixture.read_bytes()).hexdigest()
 if any(v['errors'] for v in s['arms'].values()):
     raise SystemExit('Resolve/report infrastructure errors before publishing a completed benchmark')
 full=s['arms']['full']; dynamic=s['arms']['dynamic']; no=s['arms']['no_context']
 answerable=[row for row in r['rows'] if row['kind']!='unanswerable']
 answerable_correct=sum(row['answers']['dynamic']['grade']['correct'] for row in answerable)
 context_reduction=100*(1-s['context_tokens_dynamic']/s['context_tokens_full'])
-report_url='https://github.com/rohanarun/dynamic-context-engine/blob/main/benchmarks/question-accuracy-2026-09-20.md'
+report_url=f'https://github.com/rohanarun/dynamic-context-engine/blob/main/benchmarks/{report_stem}.md'
 ink='#192322';paper='#fdfef9';colors=['#aab49f','#4d7034','#bcae96']
 plt.rcParams.update({'font.family':'DejaVu Sans','svg.fonttype':'path','axes.spines.top':False,'axes.spines.right':False,'axes.spines.left':False,'axes.spines.bottom':False})
 for mobile in [False,True]:
     fig,axs=plt.subplots(2,1,figsize=(4.5,8.8) if mobile else (10.5,7.2),facecolor=paper)
-    fig.subplots_adjust(left=.26 if mobile else .19,right=.95,top=.93,bottom=.085,hspace=.8)
+    if revision_fixture:
+        fig.suptitle(f'Revised {n}-question subset · 3 prior failures excluded', fontsize=8, color=ink)
+    fig.subplots_adjust(left=.26 if mobile else .19,right=.95,top=.87 if revision_fixture else .93,bottom=.085,hspace=.8)
     for j,ax in enumerate(axs):
         ax.set_facecolor(paper)
         ax.set_yticks([0,1,2],['Full\ncontext','Dynamic\ncontext','No context\ncontrol'],color=ink,fontsize=9 if mobile else 11)
@@ -46,7 +57,7 @@ for mobile in [False,True]:
         for i,v in enumerate(values):
             label=f'{v:.1f}%' if j==0 else f'{v:,.0f}'
             ax.text(v+(1.5 if j==0 else max(values)*.018),i,label,va='center',fontsize=9 if mobile else 11,color=ink)
-    name='benchmark-accuracy-mobile' if mobile else 'benchmark-accuracy'
+    name=asset_stem+'-mobile' if mobile else asset_stem
     for ext in ['svg','png']:
         fig.savefig(ROOT/'demo/static'/f'{name}.{ext}',facecolor=paper,dpi=180)
     plt.close(fig)
@@ -143,7 +154,23 @@ for row in r['rows']:
     header+=f"\n### {row['id']}\n\n{row['question']}\n\nGold: `{js(row['expected'])}`\n\n"
     for arm in ['full','dynamic','no_context']:
         header+=f"- {arm}: `{js(row['answers'][arm].get('answer'))}`\n"
-(ROOT/'benchmarks/question-accuracy-2026-09-20.md').write_text(header)
+if revision_fixture:
+    exclusions=', '.join('`'+v+'`' for v in revision_fixture['revision']['excluded_question_ids'])
+    disclosure=f'Revised {n}-question benchmark. Excluded after the original run: {exclusions}. Fresh Jev selections and fresh answers in all three arms; no further questions were removed. This post-selected subset is not evidence of improved accuracy on the original workload.'
+    header=header.replace('# Question-answer accuracy and context savings — September 20, 2026', '# Revised question-answer accuracy and context savings — September 20, 2026\n\n'+disclosure+' [Original 32-question run](question-accuracy-2026-09-20.md).')
+    start=header.index('The tribute failure omitted')
+    end=header.index('## Frozen protocol and limits',start)
+    header=header[:start]+'\n'+header[end:]
+    header=header.replace('No policies, thresholds, questions, or gold answers were tuned after observing outcomes.', 'The three exclusions were chosen after observing the original failures. Remaining question text, gold answers, source documents, policy, and threshold are unchanged. Fresh results are all retained, including any new failures.')
+    header=header.replace('The first question was a connectivity pilot and its successful responses were retained; remaining calls were shuffled with seed 20260920 and run with four workers.', f'All {3*n} answer calls were fresh, shuffled with seed 20260920 and run with four workers; {n} fresh cold Jev queries preceded them. Local answer receipts and Jev cache were not reused from the original run.')
+    header=header.replace('failed all 23 answerable questions', f'failed all {len(answerable)} answerable questions')
+    header=header.replace('Super API preflight calls returned HTTP 404 before the experiment; the measured calls use the direct OpenRouter endpoint with the same frozen answer model in every arm. Those failed preflights are excluded from accuracy.', 'The rerun used the direct OpenRouter endpoint with the same frozen answer model in every arm. No Super API preflight calls were made for this rerun.')
+    header=header.replace('artifacts/qa-reproduction', 'artifacts/qa-reproduction-revised')
+    header=header.replace('question-answering-2026-09-20.json', fixture_name)
+    header=header.replace('results/question-accuracy-2026-09-20.json', f'results/{report_stem}.json')
+    header=header.replace('benchmark-accuracy.png', asset_stem+'.png')
+    header=header.replace('--results artifacts/qa-reproduction-revised/report.json', '--results artifacts/qa-reproduction-revised/report.json --revision-fixture benchmarks/fixtures/'+fixture_name)
+(ROOT/'benchmarks'/f'{report_stem}.md').write_text(header)
 trs=''.join(f'<tr><th scope="row">{html.escape(group)}</th><td>{count(x["arms"]["full"])}</td><td>{count(x["arms"]["dynamic"])}</td><td>{x["input_reduction_percent"]:.1f}%</td></tr>' for group,x in r['by_group'].items())
 failure_note=(f'{len(failures)} dynamic answer(s) failed. See the report for exact missing evidence and answers.' if failures else 'No dynamic answers failed this run; a small sample does not prove equivalence.')
 section=f'''<section id="accuracy" class="benchmarks" aria-labelledby="accuracy-title">
@@ -154,5 +181,13 @@ section=f'''<section id="accuracy" class="benchmarks" aria-labelledby="accuracy-
 <details class="benchmark-table"><summary>Compare accuracy and input saved by source</summary><div class="benchmark-table-scroll"><table><thead><tr><th scope="col">Source</th><th scope="col">Full accuracy</th><th scope="col">Dynamic accuracy</th><th scope="col">Input removed</th></tr></thead><tbody>{trs}</tbody></table></div></details>
 <div class="benchmark-links"><a href="{report_url}" target="_blank" rel="noreferrer">Inspect every question, answer, and limitation ↗</a><a href="{{{{ base }}}}/assets/benchmark-accuracy.png" download>Download accuracy graph ↓</a></div>
 </section>'''
+if revision_fixture:
+    section=section.replace('benchmark-accuracy',asset_stem)
+    section=section.replace(f'{n} frozen questions.',f'{n} questions in a revised subset.')
+    section=section.replace('A separate question-answering workload.', 'Fresh rerun of the revised subset.')
+    section=section.replace('The compression rates are not interchangeable.', 'The compression rates are not interchangeable. Three questions were excluded after failing the original run; this is not evidence of improved accuracy on the original workload.')
+    section=section.replace('One model, one run,', 'One model, one fresh run,')
+    section=section.replace('</figcaption>', ' Revised subset: three prior failures excluded.</figcaption>')
+    section=section.replace('<div class="benchmark-links">', '<div class="benchmark-links"><a href="https://github.com/rohanarun/dynamic-context-engine/blob/main/benchmarks/question-accuracy-2026-09-20.md">Original 32-question results</a>')
 (ROOT/'demo/templates/accuracy.html').write_text(section+'\n')
 print(json.dumps({'full':count(full),'dynamic':count(dynamic),'no_context':count(no),'input_reduction':s['input_reduction_percent'],'context_reduction':context_reduction,'failures':[f['id'] for f in failures]},indent=2))

@@ -136,11 +136,13 @@ python3 scripts/render_benchmark_chart.py
 
 ## Question-answer accuracy benchmark
 
-[32 frozen questions](benchmarks/question-accuracy-2026-09-20.md) over public text from eight generated sites and the sample team memory: full context scored **32/32**, dynamic context **29/32 (90.6%)**, and no context **9/32**. Dynamic selection removed **96.0% of answer-model input tokens**, but lost three answers that needed multiple facts or exact calculation inputs. On answerable questions alone, dynamic scored **20/23 (87.0%)**. All nine missing-information checks passed.
+[Fresh rerun of 29 questions](benchmarks/question-accuracy-2026-09-20-revised.md) over public text from eight generated sites and the sample team memory: full context scored **29/29**, dynamic context **29/29 (100%)**, and no context **9/29**. Dynamic selection removed **96.1% of answer-model input tokens** (252,143 → 9,748). Dynamic scored **20/20** on answerable questions and **9/9** on missing-information checks. Jev processing tokens are additional.
 
-This is a separate question-answering corpus, not the website-generation prompt benchmark above. It measures fidelity to frozen source text, not regenerated website quality. The public fixture includes questions, gold answers, and supporting quotes; the report includes every answer, omissions, uncertainty, provider usage, and reproduction instructions. [View the live comparison](https://getsupers.com/demos/context-engine/#accuracy).
+This revised subset excludes `tribute-multi`, `prosthetic-multi`, and `vehicle-multi` after they failed the original run. All 29 Jev selections and 87 answer calls were rerun; no additional questions were removed. This post-selected result does not establish improved accuracy on the original workload. The [original 32-question result](benchmarks/question-accuracy-2026-09-20.md), including its three failures, remains available.
 
-![Answer accuracy and average input tokens: full context 100%, dynamic context 90.6%, and no-context control 28.1%.](demo/static/benchmark-accuracy.png)
+This is a separate question-answering corpus, not the website-generation prompt benchmark above. It measures fidelity to frozen source text, not regenerated website quality. The revised report includes the fixture, every answer, source-evidence coverage, provider usage, and reproduction instructions. [View the live comparison](https://getsupers.com/demos/context-engine/#accuracy).
+
+![Revised 29-question subset, excluding three prior failures: full and dynamic context 100%, no context 31.0%; answer-model input reduced 96.1%.](demo/static/benchmark-accuracy-revised.png)
 
 ## Parallel retrieval and timing
 
