@@ -38,8 +38,9 @@ plt.rcParams.update({'font.family':'DejaVu Sans','svg.fonttype':'path','axes.spi
 for mobile in [False,True]:
     fig,axs=plt.subplots(2,1,figsize=(4.5,8.8) if mobile else (10.5,7.2),facecolor=paper)
     if revision_fixture:
-        fig.suptitle(f'Revised {n}-question subset · 3 prior failures excluded', fontsize=8, color=ink)
-    fig.subplots_adjust(left=.26 if mobile else .19,right=.95,top=.87 if revision_fixture else .93,bottom=.085,hspace=.8)
+        fig.suptitle(f"{s['input_reduction_percent']:.0f}% fewer input tokens\n{dynamic['accuracy_percent']:.0f}% accuracy on {n} questions", fontsize=13 if mobile else 22, fontweight='bold', color=ink, y=.98)
+        fig.text(.5, .90 if mobile else .855, 'Answer-model input · revised subset\n3 prior failures excluded · Jev tokens additional', ha='center', va='top', fontsize=8 if mobile else 10, color=ink)
+    fig.subplots_adjust(left=.26 if mobile else .19,right=.95,top=(.79 if mobile else .72) if revision_fixture else .93,bottom=.085,hspace=.8)
     for j,ax in enumerate(axs):
         ax.set_facecolor(paper)
         ax.set_yticks([0,1,2],['Full\ncontext','Dynamic\ncontext','No context\ncontrol'],color=ink,fontsize=9 if mobile else 11)
@@ -186,7 +187,7 @@ section=f'''<section id="accuracy" class="benchmarks" aria-labelledby="accuracy-
 </section>'''
 section=section.replace('benchmark-accuracy',asset_stem)
 import hashlib
-asset_version=hashlib.sha256(a.results.read_bytes()).hexdigest()[:12]
+asset_version=hashlib.sha256((ROOT/'demo/static'/f'{asset_stem}.svg').read_bytes()).hexdigest()[:12]
 section=section.replace('.svg"',f'.svg?v={asset_version}"').replace('.png"',f'.png?v={asset_version}"')
 if revision_fixture:
     section=section.replace(f'{n} frozen questions.',f'{n} questions in a revised subset.')
