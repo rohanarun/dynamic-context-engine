@@ -124,3 +124,10 @@ Contributions are welcome through issues and pull requests. Keep credentials, lo
 ## Website-generation benchmark
 
 [Eight real archived website requests](benchmarks/website-replay-2026-09-20.md): at the default cutoff, generation-input tokens fell **14.8%**, but estimated net input cost fell only **2.7%** after Jev. All 80 pre-registered required-paragraph checks passed. A higher cutoff saved more but dropped required context; cached-prompt comparisons were more expensive. This is an input-only replay, not proof of equivalent generated output or invoice savings. The report includes a reusable harness, public result data, price sources, and limitations.
+
+The [live results chart](https://getsupers.com/demos/context-engine/#benchmarks) compares each request and includes a downloadable PNG and accessible data table. Regenerate its desktop/mobile SVG and PNG assets and HTML from the public result JSON without provider calls:
+
+```sh
+python3 -m pip install 'matplotlib>=3.9,<4'
+python3 scripts/render_benchmark_chart.py
+```
