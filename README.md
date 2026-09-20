@@ -1,4 +1,4 @@
-# Jev Context Engine
+# Dynamic Context Engine
 
 **A paragraph memory that chooses context for the request in front of your agent.**
 
@@ -11,8 +11,8 @@ Store project notes, preferences, or documentation in SQLite. At request time, J
 Python 3.10+ and a [TypeSafe API key](https://console.typesafe.ai) are required for inference. Jev makes relevance judgments; SQLite stores the paragraphs. TypeSafe is not the database.
 
 ```sh
-git clone https://github.com/rohanarun/jev-context-engine.git
-cd jev-context-engine
+git clone https://github.com/rohanarun/dynamic-context-engine.git
+cd dynamic-context-engine
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -e .

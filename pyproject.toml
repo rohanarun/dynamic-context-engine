@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "jev-context-engine"
+name = "dynamic-context-engine"
 version = "0.1.0"
 description = "Model-selected paragraph memory for Codex, Claude Code, Hermes, and any agent."
 readme = "README.md"

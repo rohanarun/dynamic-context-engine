@@ -21,7 +21,7 @@ function result(data) {
 }
 function install(agent) {
   const paths = {codex:'~/.agents/skills',claude:'~/.claude/skills',hermes:'~/.hermes/skills'};
-  $('install-code').textContent = `git clone https://github.com/rohanarun/jev-context-engine.git\ncd jev-context-engine\npython3 install_skill.py --agent ${agent}\n\n# Installs to ${paths[agent]}/dynamic-context`;
+  $('install-code').textContent = `git clone https://github.com/rohanarun/dynamic-context-engine.git\ncd dynamic-context-engine\npython3 install_skill.py --agent ${agent}\n\n# Installs to ${paths[agent]}/dynamic-context`;
   document.querySelectorAll('[data-agent]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.agent===agent)));
 }
 async function start() {
