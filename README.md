@@ -131,3 +131,9 @@ The [live results chart](https://getsupers.com/demos/context-engine/#benchmarks)
 python3 -m pip install 'matplotlib>=3.9,<4'
 python3 scripts/render_benchmark_chart.py
 ```
+
+## Question-answer accuracy benchmark
+
+[32 frozen questions](benchmarks/question-accuracy-2026-09-20.md) over public text from eight generated sites and the sample team memory: full context scored **32/32**, dynamic context **29/32 (90.6%)**, and no context **9/32**. Dynamic selection removed **96.0% of answer-model input tokens**, but lost three answers that needed multiple facts or exact calculation inputs. On answerable questions alone, dynamic scored **20/23 (87.0%)**. All nine missing-information checks passed.
+
+This is a separate question-answering corpus, not the website-generation prompt benchmark above. It measures fidelity to frozen source text, not regenerated website quality. The public fixture includes questions, gold answers, and supporting quotes; the report includes every answer, omissions, uncertainty, provider usage, and reproduction instructions. [View the live comparison](https://getsupers.com/demos/context-engine/#accuracy).

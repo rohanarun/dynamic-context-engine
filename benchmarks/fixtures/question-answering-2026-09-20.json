@@ -1,0 +1,608 @@
+{
+  "version": 1,
+  "captured_date": "2026-09-20",
+  "scope": "Frozen static public website text plus fictional Orbit memory. Measures source fidelity, not medical/legal/financial truth or generated-site quality. Scripts, styles, navigation, footers and generic promotion removed; contiguous text spans grouped at documented headings. No browser interactions or runtime-computed values captured.",
+  "documents": [
+    {
+      "source": "trade-negotiation-matrix-48",
+      "url": "https://app.getsupers.com/sites/trade-negotiation-matrix-48/",
+      "title": "Bilateral Trade Negotiation Matrix & Bargaining Power Simulator",
+      "text": "Bilateral Trade Negotiation Matrix & Bargaining Power Simulator Trade Diplomacy & Game Theory Modeling Bilateral Trade Negotiation Matrix Simulate delegation bargaining leverage, envoy seniority elevation, issue-by-issue reservation limits, and calculate Nash equilibrium concessions across high-stakes trade rounds. Load Round Preset: US-China Tech & Tariff Round (Li Chenggang Envoy Elevation) EU - Mercosur Ag & Climate Pact UK - India Bilateral Trade Agreement\n\nDelegation Profiles Reset Defaults Delegation A: China Leverage: 54% Delegation Name Chief Envoy Title & Mandate Working-level Diplomat (Narrow Technical Mandate) Vice Minister / Assistant Representative Elevated Top International Trade Negotiator (Cabinet Rank) Special Presidential / Politburo Plenipotentiary (Full Discretion) Elevated rank directly increases concession credibility and unilateral leverage. Domestic Market Size & Leverage ($T GDP equivalent) 18.5T BATNA Resilience (Alternative Trading Partners) 65% Walk-away durability if talks collapse without an agreement.\n\nDelegation B: United States Leverage: 46% Delegation Name Chief Envoy Title & Mandate Working-level Diplomat (Narrow Technical Mandate) Deputy US Trade Representative (USTR) Cabinet-Level U.S. Trade Representative Presidential Special Envoy / White House Mandate Domestic Market Size & Leverage ($T GDP equivalent) 28.0T BATNA Resilience (Alternative Supply Chains) 60%\n\nActive Agenda Issues 4 Issues Adjust reservation demands (party threshold 0-100 where higher favors Delegation A, lower favors Delegation B). Diplomatic Equilibrium & ZOPA Map ZOPA Open Relative Bargaining Ratio 1.17 : 1 China +14.8% net advantage ZOPA Feasibility Index 75% 3 of 4 issues in overlap Talks Breakdown Risk 24% (Low) High BATNA cushion on both sides Settlement Space & Concession Radar Nash Equilibrium (Purple Line) vs Stances Issue Settlement Breakdown Negotiation Topic Weight Del. A Demand Del. B Offer Zone of Agreement Equilibrium Point Status Diplomatic Intelligence Memorandum Loading delegation analysis... All delegation parameters synchronized. Re-solve Equilibrium Download Briefing Dossier\n\nDiplomatic Titling & Bargaining Mechanics In high-stakes bilateral negotiations, as observed when China named veteran envoy Li Chenggang as its top international trade negotiator hours before New York talks with U.S. counterparts, the title elevation signals both political commitment and expanded concession latitude. A higher diplomatic mandate prevents delegations from claiming \"lack of domestic clearance\" to stall talks, narrowing strategic posturing while increasing the delegation's credible deterrence against walking away.\n\nAnalytical Frameworks Used Zone of Possible Agreement (ZOPA) ZOPA exists when the buyer/offer reservation price overlaps with the seller/demand reservation price. Without ZOPA overlap, negotiations encounter structural deadlock unless parties engage in cross-issue logrolling (e.g. trading tariff cuts for tech export permits). Nash Bargaining Solution Maximizes the product of mutual utility gains above each side's BATNA (Best Alternative to a Negotiated Agreement). A state with a strong domestic market and diversified trade allies possesses higher threat leverage. Cross-Issue Logrolling By pairing asymmetric issue valuations, negotiators yield on low-priority items to secure high-priority gains, expanding the total joint trade surplus beyond zero-sum outcomes.",
+      "extracted_text_sha256": "e3f0dc24e3840f50c0b4fc96979f6a870babf0c248856739f79e3b19b577a9e4"
+    },
+    {
+      "source": "forecast-ensemble-lab-48",
+      "url": "https://app.getsupers.com/sites/forecast-ensemble-lab-48/",
+      "title": "Human vs Machine Forecast Ensemble Lab — Calibration &amp; Brier Score Analysis",
+      "text": "Human vs Machine Forecast Ensemble Lab — Calibration & Brier Score Analysis The Economist Benchmark Simulator Human vs Machine Forecast Ensemble Lab AI models now rival top superforecasters on geopolitics and macroeconomic predictions. Test calibrated ensembling, quantify Brier skill scores, and simulate the tipping point where synthetic intelligence overtakes human wisdom.\n\nEnsemble Controls 12 Resolved Items Benchmark Scenario Geopolitics & Global Elections (2024–2026) Frontier AI & Tech Breakthroughs Macroeconomics, Rates & Inflation Custom Sandbox (Editable Questions) Curated sets derived from Metaculus, Good Judgment Open, and LLM forecast benchmarks. Ensemble Aggregation Model Log-Odds Extremized Linear Weighted Inverse-Variance Geometric Mean Tetlock & Baron log-odds extremization corrects for crowd underconfidence. Human vs Machine Weight 50% H / 50% AI 0% = Pure AI baseline • 100% = Pure Human Superforecaster crowd. Extremization Multiplier (d) 1.40× Pushes consensus towards 0 or 1 to reward independent signal overlap. Simulate AI Capability Leap +0% (Baseline) Sharpen AI probability resolution & reduce hallucinated uncertainty. Re-evaluate Reset\n\nHuman Forecasters 0.142 Brier Score (Lower is better) Machine (LLM Agent) 0.138 Brier Score Hybrid Ensemble 0.112 -21.1% error Ensemble Skill Score +0.552 vs Climatology baseline Reliability Diagram (Calibration Curve) Perfect forecasting lies directly on the 45° dashed diagonal. Deviations reveal systematic over- or under-confidence. Human Machine Hybrid Ensemble Resolved Questions in Benchmark ( 12 items) Observed Outcome (0 = Did not occur, 1 = Occurred) Question Outcome Human Crowd Machine LLM Ensemble Calibration updated. Hybrid model outperforms both standalone agents. Export CSV Export Full Report (JSON)\n\nThe Brier Score & Calibration Developed by Glenn W. Brier in 1950, the Brier score measures the accuracy of probabilistic forecasts: Brier Score = (1 / N) ∑ (f i - o i ) 2 Where f i is the predicted probability [0, 1] and o i is the binary outcome ∈ {0, 1}. Lower scores indicate superior skill, with 0.0 being clairvoyant perfection and 0.25 representing pure random guessing on balanced events. The Brier score decomposes neatly into Reliability (calibration alignment), Resolution (ability to sort outcomes), and Uncertainty (intrinsic variance of reality).\n\nWhy Hybrid Ensembles Win Human superforecasters excel at narrative nuance, insider intuition, and spotting structural breaks. LLM multi-agent pipelines excel at instantaneous historical base-rate retrieval, tireless news synthesis, and non-emotional Bayesian updating. Log-Odds: φ(p) = ln(p / (1 - p)) Combined: p* = σ( d × [w × φ(p H ) + (1-w) × φ(p M )] ) Because human and machine errors are partially uncorrelated, blending them in log-odds space with an extremization factor d > 1 eliminates mutual underconfidence and strips out single-agent bias.\n\nFrequently Asked Questions What was The Economist's finding regarding AI vs Human forecasters? Recent empirical trials (including studies by Berkeley, Metaculus, and forecasting researchers) showed that state-of-the-art LLM ensembles (incorporating web retrieval, chain-of-thought debates, and median pooling) achieved Brier scores comparable to or exceeding the average crowd of human forecasters, and were on par with top superforecaster cohorts on multiple geopolitical horizons. How does the \"Log-Odds Extremized\" algorithm work? Standard linear probability averaging (e.g., (p1 + p2)/2) suffers from systematic conservatism because independent forecasters often hold complementary evidence that points in the same direction. Converting probabilities into log-odds space, taking a weighted combination, and then multiplying by an extremizing coefficient d (typically between 1.2 and 1.6) pulls consensus toward definitive confidence when both agents lean in agreement. Are these calculations performed locally on my device? Yes. All probability transforms, Murphy calibration binning, Brier score sums, and interactive sensitivity tests run locally in real-time within your browser engine. No data is sent to an external server.",
+      "extracted_text_sha256": "df6dc415b000ce6b11c2ea01378abbe9f6a85c4950d3f82e4a8cd21fbafc8d15"
+    },
+    {
+      "source": "skincare-routine-auditor-48",
+      "url": "https://app.getsupers.com/sites/skincare-routine-auditor-48/",
+      "title": "Skincare Routine Auditor — Evidence-Based Barrier &amp; Conflict Checker",
+      "text": "Skincare Routine Auditor — Evidence-Based Barrier & Conflict Checker Skin Barrier & Conflict Engine Audit Your Skincare Regimen Against Dermatologist Best Practices Identify aggressive active ingredient collisions, skin barrier red flags, and the 5 common damaging habits dermatologists urge people to avoid.\n\nYour Current Regimen Clear & Reset Load Sample Routine Risky Stack (Over-Exfoliated) Derm-Balanced (Gentle) Acne-Focused (With Clashes) Skin Profile Combination (Balanced / Oily T-zone) Sensitive / Easily Reactive Dry / Dehydrated / Barrier Compromised Oily / Congestion Prone 5 Habits Dermatologists Advise Against Select any habits present in your daily grooming: Using coarse physical scrubs / abrasive microbeads or brushes Washing face with steaming hot shower water Picking blemishes, manual pore extraction, or pore strips Washing with harsh squeaky-clean foaming sulfates >2x daily Relying solely on SPF makeup or skipping broad-spectrum sunscreen\n\nMorning (AM) Evening (PM) Add Step or Active to Morning : Gentle Hydrating Cleanser BHA (Salicylic Acid) Cleanser Strong Clarifying Cleanser Glycolic / Lactic Acid (AHA) Salicylic Acid Serum (BHA) Azelaic Acid 10% Pure L-Ascorbic Acid (Vit C 15%) Gentle Vitamin C Derivative Niacinamide Serum (5-10%) Over-the-Counter Retinol Prescription Tretinoin / Adapalene Benzoyl Peroxide Gel (2.5-5%) Ceramide Barrier Moisturizer Hyaluronic Acid Hydrating Serum Occlusive Facial Oil Broad-Spectrum SPF 30-50+ Sunscreen 100% Mineral Zinc Oxide SPF + Add 92 Optimal Barrier Protection Minimal clash risk and strong moisture-barrier defense.\n\nAM Flow Sequence Cleanser → Actives → Moisture → SPF PM Flow Sequence Cleanse → Repair/Retinoid → Lock-in Dermatologist Audit & Corrective Prescriptions 3 Observations Audit active. Evaluated 6 dermatological rules. View Balanced Plan Card Export Routine (TXT) Download File\n\nThe 5 Things Dermatologists Wish You Stopped Doing Modern clinical dermatology highlights that healthy skin is built on stratum corneum integrity, not relentless chemical peeling or scorched-earth disinfection. 1 Coarse Physical Scrubs × Avoid: Walnut shells, abrasive pumice beads, stiff mechanical rotating brushes. ✓ What to do instead: Rely on mild chemical micro-exfoliation (e.g., Lactic Acid or 1-2% Salicylic Acid) only 1-2 nights a week, or soft microfiber cloths.\n\n2 Steaming Hot Water × Avoid: Washing your face in blistering hot shower water. ✓ What to do instead: Use lukewarm or tepid water. Hot water strips vital intercellular ceramides and triggers rebound capillary flushing.\n\n3 Picking & Pore Strips × Avoid: Squeezing inflamed comedones, manual picking, aggressive adhesive strips. ✓ What to do instead: Apply hydrocolloid blemish patches to isolate lesions and treat targeted spots with 2.5% benzoyl peroxide or azelaic acid.\n\n4 Stripping Foams >2x / Day × Avoid: Squeaky-clean high-pH alkaline soaps and multiple daytime scrubs. ✓ What to do instead: Switch to a non-foaming hydrating or cream-to-foam cleanser with pH 5.0–5.5 that respects the natural acid mantle.\n\n5 Relying on Makeup SPF × Avoid: Thinking foundation or skin-tint with SPF 15 provides full solar defense. ✓ What to do instead: Slather 1/4 teaspoon (two finger-lengths) of dedicated broad-spectrum SPF 30+ daily, 365 days a year, regardless of cloud cover. Dermatologist Routine Summary Card Close Print / Save as PDF",
+      "extracted_text_sha256": "e1e95ed55fe3ec66e1c5091723edd70008ec6cb177017d1c2c028186a03e9a33"
+    },
+    {
+      "source": "command-deck-melder-88",
+      "url": "https://app.getsupers.com/sites/command-deck-melder-88/",
+      "title": "Command Deck Melder &amp; Battle Simulator",
+      "text": "Command Deck Melder & Battle Simulator Command Deck Melder Fuse spells, attacks, and crystal catalysts to discover high-tier abilities. Build an 8-slot action deck and test rotation cooldowns in real-time combat. Load Archetype: Spellweaver (Aqua) Power Striker (Terra) Swift Blade (Ventus)\n\nCommand Crucible Synthesis Lab Base Command (Slot A) Catalyst Command (Slot B) Imbued Crystal (Ability Catalyst) Abundant Crystal (HP Boost / Cure Boost) Shimmering Crystal (Fire / Blizzard Boost) Fleeting Crystal (Attack / Magic Haste) Pulsing Crystal (Reload Boost / Leaf Bracer) Soothing Crystal (Item Boost / Damage Syphon) Wellspring Crystal (Second Chance / Once More)\n\nResulting Synthesis 100% Success Firaga Fire Ability: Once More Powerful multi-hit combustion flame that tracks target and recharges in 12s. Meld & Equip to Selected Slot Surprise Recipe Fusion Secret Recipe Matrix Discovered Command A Command B Result Element\n\nActive Command Deck (8 Slots) Tap any slot to target it for melding, or trigger [1-8] on your keyboard to fire. Reset Deck Simulation Dummy: Iron Colossus HP: 2400 / 2400 > Deck ready. Cast any command to begin simulation. Combat Telemetry Estimated Burst DPS 0 Full Rotation Time 0.0s Equipped Passive Abilities 0 Unlocked Elemental Coverage: ▶ Run Full Auto Rotation Export Build Sheet (.json) Copy Build Summary Download File Ready to craft and fight.\n\nCommand Melding Mechanics Fusing two leveled commands produces an upgraded or rare hybrid variant. Adding high-grade crystals (like Wellspring or Fleeting) permanently imbues game-changing support abilities such as Second Chance, Reload Boost, or Magic Haste.\n\nRotation & Cooldown Optimization Unlike standard MP bars, Command Deck combat is governed by individual recharge tickers. Stacking fast reload spells (like Blitz or Fire Surge) minimizes dead air, maintaining steady damage pressure against agile bosses. Elemental Vulnerabilities Balancing Fire, Blizzard, Thunder, and Neutral Physical guarantees your deck handles elemental resists. High-tier synthesis results like Mega Flare or Glacier Strike shred through multi-target encounters.",
+      "extracted_text_sha256": "73fa17a803fa5415d1af0c60f03329675520516e1a9d6bd4a45d63f869930cc0"
+    },
+    {
+      "source": "documentary-release-risk-modeler-72",
+      "url": "https://app.getsupers.com/sites/documentary-release-risk-modeler-72/",
+      "title": "Documentary Release Risk & Distribution Modeler | DocuRisk",
+      "text": "Documentary Release Risk & Distribution Modeler | DocuRisk Super Entertainment Risk Intelligence Documentary Release & Exposure Navigator Stress-test theatrical releases, festival buzz retention, anti-SLAPP defensibility, and studio boycott blowback for high-profile investigative films. PRESETS: Tech Billionaire / Studio Hesitancy State Intelligence Expose Pharma Whistleblower\n\nRisk Calibration & Clearances Reset 1. Subject Profile & Retaliatory Leverage Litigation & Retaliatory Power 9.4 / 10 Net worth, litigious track record, owned media platforms, and political sway. Corporate & Ad-Boycott Exposure 8.5 / 10 Studio vulnerability to ad pulls, sister-brand boycotts, or platform de-prioritization.\n\n2. Evidentiary Rigor & Legal Moat Source Hardiness & Subpoena Resilience 8.2 / 10 Corroborated on-the-record testimony, contemporaneous documents, and audited recordings. Public Interest & Fair Comment Strength 9.0 / 10 Legal protection for public figures, anti-SLAPP statutory shields, and journalistic intent.\n\n3. Critical Reception & Economics Festival Acclaim & Audience Demand 9.2 / 10 Rotten Tomatoes critics consensus, festival standing ovations, and buzz momentum. Production & Acquisition Cost ($M) $18.5M Direct cost basis, rights acquisition, and P&A marketing commitment.\n\n4. Clearance Safeguards Active Tier-1 E&O Policy $20M+ Defamation coverage bound External Counsel Vetted Second-opinion line-by-line review Formal Right of Reply 30-day substantive response window Indie Label Indemnity Studio parent ring-fenced via sub-label\n\nStrategic Release Modeling High Friction Release Aggregated Release Risk 74.2% Critical Litigious Exposure Commercial Demand Ceiling $42.8M Festival Demand Ratio: 1.84x Defamation Reserve Est. $6.4M E&O Deductible + Defense Warchest Overall Release Viability Spectrum HOLD & RE-CUT ADVISABLE UNENCUMBERED RELEASE BALANCED WINDOW MAJOR BLOWBACK / VAULT RISK 5-Axis Threat & Opportunity Profile Normalized Studio Assessment (0–100)\n\nRecommended Distribution Pathways Optimal 1. Full Theatrical & Day-and-Date Streaming Standard wide release capitalizing on festival buzz. Maximizes immediate revenue but exposes major studio brand to retaliatory campaigns and injunction attempts. Yield $48.2M Legal Drag -42% Viability 58 / 100\n\nTop Rec 2. Boutique Division / Indie Re-licensing Carve out release through a specialized arthouse imprint (e.g., Focus, A24, Neon) with independent legal shielding. Insulates studio parent while preserving critical run. Yield $36.5M Legal Drag -14% Viability 86 / 100\n\nOptimal 3. Academy Qualifier & Curated SVOD Limit initial exposure to one-week NY/LA qualifying runs followed by premium subscriber window. Tightens subject target window while securing award eligibility. Yield $22.0M Legal Drag -8% Viability 79 / 100\n\nOptimal 4. Shelve & Tax Impairment / Rights Buyout Withhold distribution completely or broker a quiet rights reversion back to filmmakers. Zero litigation threat, but writes off budget and sparks public backlash. Yield -$14.2M Legal Drag 0% Viability 32 / 100 Export Release Risk Memo (JSON/TXT) Copy Executive Summary Decision models synchronized in real time.\n\nEntertainment Industry Release Dilemmas: The Risk-Vs-Buzz Paradox High-profile documentary acquisitions often create acute governance tension between creative acclaim and corporate exposure. When a project receives rapturous festival reception—such as Universal’s deliberations over an unvarnished Elon Musk profile—studio executives face asymmetric legal and advertiser exposure that rarely factors into standard box office forecasting. Asymmetric Litigious Leverage Unlike ordinary public figures, modern industrial titans control private commercial supply chains, sovereign contracts, and social megaphone networks capable of inflicting cross-conglomerate costs. Anti-SLAPP Jurisdictional Variance While states like California and New York offer robust early-dismissal mechanisms for public-interest reporting, federal venues or international territories lack uniform shields, creating venue-shopping hazards. The Arthouse Ring-Fence Strategy By routing distribution through specialized subsidiaries (or orchestrating producer buybacks), legacy studios protect enterprise ad-rates while allowing important journalism to reach audiences.",
+      "extracted_text_sha256": "132a4c4ca6b00e7d882e314b1fd18eb9428566948c16015724d3955f7a0806b5"
+    },
+    {
+      "source": "tribute-concert-setlist-planner-48",
+      "url": "https://app.getsupers.com/sites/tribute-concert-setlist-planner-48/",
+      "title": "Tribute Concert Setlist & Run of Show Planner",
+      "text": "Tribute Concert Setlist & Run of Show Planner Tribute Concert Setlist & Run of Show Planner Balance musical anthems, honorary speeches, tribute video segments, and ensemble finales with real-time runtime tracking and stage cue sheet exports.\n\nAdd Show Cue Concert / Tribute Title Segment Type Musical Performance / Song Guest Speaker / Family Testimonial Memorial Video / Retrospective Montage Stage Change / Intermission Segment Title / Song Name Duration (min) Performer / Speaker Stage & Lighting Cue Notes (Optional) Add to Run of Show Load Curated Tribute Scenarios: Legend Celebration Charity Gala Start Empty\n\nAn Evening for John: Legacy Tribute Revue 8 segments scheduled Format Cue Sheet Total Running Time 48.5 min Estimated Show End 20:48 Music vs Speaking 74% / 26% Concert Timeline Composition Songs (amber) • Talks (blue) • Videos (purple) • Breaks (slate) No cues scheduled yet. Fill out the form or choose a preset above to begin organizing the show. Ready to edit, resequence, or export the running order. Download Run of Show\n\nPacing Tribute & Benefit Concerts Tribute events face unique pacing challenges: guest speeches and video reels frequently overrun allocated windows. Keeping speeches capped under 4 minutes and interspersing high-energy signature anthems ensures the audience remains emotionally engaged.\n\nStage Cues & Backstage Coordination Each row generates calculated stage timestamps based on an 8:00 PM standard call time. Use the exported text cue sheet to provide audio engineers, lighting directors, and stage managers with synchronized handoffs.\n\nEnsemble Finales Tribute showcases traditionally conclude with an all-hands finale bringing together all guest performers. Ensure sufficient turnaround time is scheduled prior to the encore for mic line checks and multi-artist stage entry.",
+      "extracted_text_sha256": "ab450dfe1756715d1158f2d73787edff2cbd25d2ddbe9eb86dfa961012064d68"
+    },
+    {
+      "source": "prosthetic-chair-optimizer-84",
+      "url": "https://app.getsupers.com/sites/prosthetic-chair-optimizer-84/",
+      "title": "Prosthetic Chair Optimizer — SFX Makeup Workflow & Call Sheet Planner",
+      "text": "Prosthetic Chair Optimizer — SFX Makeup Workflow & Call Sheet Planner Prosthetic Chair Optimizer Preset: Tom Cruise 'Digger' Transformation (Heavy Prosthetic) Sci-Fi Full Cowl & Multi-Piece Creature Subtle Silicon Aging & Facial Appliances Custom Department Workflow Model multi-artist concurrency, pre-painted silicone transfers, quick-curing adhesives, and modular wigs to compress multi-hour prosthetic application times down to under 60 minutes for high-budget call sheets.\n\nDepartment Configuration Reset Lead SFX Makeup Artists 3 Artists Parallel application capability across face, head, and hands. Target On-Set Time Crew Tier ($/hr) Tier 1 Studio ($120/hr SFX) Tier 2 Commercial ($85/hr) Tier 3 Indie ($55/hr)\n\nOptimization Innovations Pre-Blended Silicone Transfers Factory-painted appliances with pre-feathered cap-plastic borders eliminate manual edge melting. -42% Face Modular Pre-Rigged Wig & Cap Magnetic/press-fit cranial piece combined with pre-ventilated lace front saves separate blending steps. -48m Cowl Rapid-Tack UV/Medical Adhesives Catalyzed pros-aide formulations curing in 30 seconds vs traditional 5-10 minute tacky air-dry layers. -25m Tack Multi-Pass Stencil Airbrush Rig Laser-cut organic skin-tone stencils for rapid freckling, capillaries, and micro-vein matching. -20m Color\n\nSub-Assembly Breakdown Baseline single-artist sequential times Baseline Single Chair 5h 45m Single artist sequential Optimized Chair Time 0h 54m 84.3% Time Reduced Actor Chair Call 07:06 AM Earlier sleep: +4h 51m Est. Overtime Savings $1,649 Per shooting day Application Schedule (Minutes from Chair Call) Cowl / Cranial Facial Pieces Airbrush & Tint Hair & Wig Hands & Teeth Ready: 3 artists scheduled with 4 optimizations active. Copy Call Sheet Download Schedule\n\nIndustrial SFX Pipeline Principles The Concurrency Bottleneck Traditional special makeup effects are constrained by physical workspace: multiple hands cannot crowd the actor's face simultaneously. Effective multi-artist choreography assigns Artist 1 to cranial/cowl fitting while Artist 2 simultaneously preps and adheres cheek/mandible appliances, followed by simultaneous bilateral airbrushing.\n\nPre-Painted Transfer Science Traditional wet prosthetic application requires painting in the chair (splattering, micro-veining, sealing). Modern vacuum-bagged silicone transfers are pre-tinted with translucent intrinsic pigments, requiring only 10% edge-melt work on set with acetone or isopropyl myristate.\n\nUnion Turnaround & Golden Time Under SAG-AFTRA and IATSE rules, an actor's 12-hour turnaround rest period begins when they leave makeup removal. Shaving chair time from 6 hours to 55 minutes prevents forced call violations, golden-hour overtime fines, and star exhaustion across 60+ shoot days.",
+      "extracted_text_sha256": "9734870445c335cf7ba8b58ba2f0c90540230d4add3860b850cdba43471b798c"
+    },
+    {
+      "source": "vehicle-packaging-studio-72",
+      "url": "https://app.getsupers.com/sites/vehicle-packaging-studio-72/",
+      "title": "Vehicle Packaging &amp; Chassis Dynamics Studio",
+      "text": "Vehicle Packaging & Chassis Dynamics Studio Don't Call It an SUV: Chassis Dynamics & Packaging Architect Compare the physics of front-mid-engine transaxle GT packaging against conventional high-center-of-mass performance SUVs. Explore roll angle, static stability factor, lateral load transfer, and weight distribution in real time.\n\nChassis Configuration Front-Mid GT Vehicle Benchmark Archetype Ferrari Purosangue (Front-Mid V12, Transaxle) Lamborghini Urus (Front Overhung V8, Crossover SUV) Porsche Cayenne Turbo GT (Traditional High SUV) Super GT Coupe (Low Slung 2+2 Reference) Custom Chassis Specification Packaging & Geometry Wheelbase 3018 mm Overall Vehicle Height 1589 mm Track Width (Front / Rear Avg) 1730 mm\n\nPowertrain Placement Front-Mid (Behind Axle) Front-Mid V12 + Rear Transaxle (49:51) Front Overhung V8 + Trans Mounted (58:42) Longitudinal Front Engine (54:46) Rear Mid-Engine (42:58)\n\nDynamics & Cornering Test Center of Gravity (CG) Height 545 mm Roll Stiffness & Active Multimatic Damping 3800 Nm/deg Cornering Lateral Acceleration 0.95 G Animate Slalom Reset Defaults\n\nLive Cutaway & Telemetry Simulation Profile Cutaway Kinematic Roll View Top Weight Layout Roll Angle at Limit 1.62 deg Exceptional flat stance Static Stability Factor (SSF) 1.59 t/(2h) Sports car threshold (>1.50) Weight Split (F / R) 49 / 51 % Rear transaxle balance Aero Drag Index (Cd · A) 0.78 m² 22% lower than full-size SUV Ready. Adjust geometry, powertrain position, or lateral G-load to test chassis balance. Export Technical Audit\n\nThe Front-Mid vs. Overhung Dilemma Traditional performance SUVs (like the Urus or Cayenne) hang a heavy twin-turbo V8 engine forward of or directly above the front axle to package passenger legroom, creating 56–58% front axle bias that promotes understeer. By placing the V12 completely behind the front axle line and moving the dual-clutch transmission to the rear axle, a near-perfect 49:51 weight split is achieved.\n\nMultimatic True Active Spool Valve Anti-roll bars inherently link left and right wheels, causing head-toss over one-sided bumps. High-end sports crossovers replace mechanical bars with 48V spool-valve active dampers that apply up to 4,000 N of reactive force per corner, keeping the body virtually level (roll angle < 1.8°) during 1.0G lateral cornering without penalizing ride compliance.\n\nCenter of Gravity (CG) Height & SSF Static Stability Factor ($SSF = \\frac{\\text{Track}}{2 \\cdot h_{CG}}$) dictates rollover resistance and dynamic lateral load transfer $\\Delta W = \\frac{m \\cdot a_y \\cdot h_{CG}}{t}$. Lowering overall vehicle height to ~1589 mm reduces CG height by 120 mm compared to tall SUVs, dramatically minimizing tire overloading and preserving mid-corner grip.",
+      "extracted_text_sha256": "5a5096f60c19942ce8948f1bc743fb6031f8322c91b913b440279540c302a4db"
+    },
+    {
+      "source": "product.md",
+      "text": "Orbit is a collaborative project planner for small creative teams. Its core promise is a calm shared view of the next milestone, owners, and blockers.\n\nOrbit's dashboard is built with React and TypeScript. Shared UI components live in src/ui. Use CSS custom properties for color and spacing; keep feature-specific state inside the feature.\n\nThe dashboard supports light and dark themes. Persist an explicit theme choice in localStorage; otherwise follow prefers-color-scheme. Avoid a flash of the wrong theme during initial page load.\n\nAll interactive controls must support keyboard navigation, visible focus, and accessible names. Toggle controls expose their state to assistive technology. Respect prefers-reduced-motion.",
+      "title": "Orbit fictional team memory",
+      "url": "https://getsupers.com/demos/context-engine/"
+    },
+    {
+      "source": "support.md",
+      "text": "Refunds are available within 14 days of a customer's first paid subscription, as long as it is their first refund. Annual renewals and purchases older than 14 days require a support review; do not promise approval.\n\nBefore processing a refund, verify the purchase date and whether a previous refund exists. A support agent may explain eligibility but must obtain the customer's confirmation before cancelling their workspace subscription.\n\nCustomer replies should be warm, brief, and specific. Acknowledge the request, explain the next step, and avoid making guarantees before checking the account. Never include private billing data in a public response.\n\nOrbit's free plan supports three collaborators. The Team plan is $12 per collaborator per month. Enterprise pricing is negotiated with the sales team.",
+      "title": "Orbit fictional team memory",
+      "url": "https://getsupers.com/demos/context-engine/"
+    },
+    {
+      "source": "engineering.md",
+      "text": "Production releases start from a reviewed pull request. Run the unit suite, type checks, and a staging smoke test before release. Database changes need a backwards-compatible migration.\n\nDeployments use versioned container images. Record the previous image tag before rollout. If error rates increase, restore that image and verify the health endpoint; do not reverse a database migration without an explicit recovery plan.\n\nThe notifications service sends a daily email digest at 09:00 in each workspace's timezone. Users can opt out from notification preferences. New integrations must honor that preference.\n\nThe team's offsite is in Lisbon in October. Travel arrangements are coordinated by operations, and attendees should submit dietary requirements one month before departure.",
+      "title": "Orbit fictional team memory",
+      "url": "https://getsupers.com/demos/context-engine/"
+    }
+  ],
+  "cases": [
+    {
+      "id": "trade-fact",
+      "group": "Trade",
+      "kind": "lookup",
+      "question": "In the frozen Trade Negotiation Matrix snapshot, what percentage leverage is displayed for China? Return {\"china_leverage_percent\": number}.",
+      "expected": {
+        "china_leverage_percent": 54
+      },
+      "required_evidence": [
+        {
+          "source": "trade-negotiation-matrix-48",
+          "position": 1,
+          "quote": "Leverage: 54%"
+        }
+      ]
+    },
+    {
+      "id": "trade-multi",
+      "group": "Trade",
+      "kind": "multi_paragraph",
+      "question": "In the Trade Negotiation Matrix snapshot, subtract the United States displayed leverage percentage from China’s displayed leverage percentage. Use the two delegation profiles, not the separate net-advantage metric. Return {\"leverage_gap_percentage_points\": number}.",
+      "expected": {
+        "leverage_gap_percentage_points": 8
+      },
+      "required_evidence": [
+        {
+          "source": "trade-negotiation-matrix-48",
+          "position": 1,
+          "quote": "Leverage: 54%"
+        },
+        {
+          "source": "trade-negotiation-matrix-48",
+          "position": 2,
+          "quote": "Leverage: 46%"
+        }
+      ]
+    },
+    {
+      "id": "trade-unknown",
+      "group": "Trade",
+      "kind": "unanswerable",
+      "question": "What exact calendar date did the modeled bilateral trade agreement get signed? Return {\"signed_date\": \"YYYY-MM-DD\"}, or null for the field if the frozen sources do not state it.",
+      "expected": {
+        "signed_date": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "forecast-fact",
+      "group": "Forecast",
+      "kind": "lookup",
+      "question": "How many resolved items are listed in the frozen Forecast Ensemble Lab benchmark? Return {\"resolved_items\": number}.",
+      "expected": {
+        "resolved_items": 12
+      },
+      "required_evidence": [
+        {
+          "source": "forecast-ensemble-lab-48",
+          "position": 1,
+          "quote": "12 Resolved Items"
+        }
+      ]
+    },
+    {
+      "id": "forecast-multi",
+      "group": "Forecast",
+      "kind": "calculation",
+      "question": "In the Forecast Ensemble Lab snapshot, subtract the hybrid Brier score from the human Brier score. Does the source say a lower Brier score is better? Return {\"absolute_brier_improvement\": number, \"lower_is_better\": boolean}.",
+      "expected": {
+        "absolute_brier_improvement": 0.03,
+        "lower_is_better": true
+      },
+      "required_evidence": [
+        {
+          "source": "forecast-ensemble-lab-48",
+          "position": 2,
+          "quote": "Human Forecasters 0.142"
+        },
+        {
+          "source": "forecast-ensemble-lab-48",
+          "position": 2,
+          "quote": "Hybrid Ensemble 0.112"
+        }
+      ]
+    },
+    {
+      "id": "forecast-unknown",
+      "group": "Forecast",
+      "kind": "unanswerable",
+      "question": "What is the first and last name of the highest-scoring individual human forecaster in the frozen Forecast Ensemble Lab benchmark? Return {\"person_name\": string}, or null if unstated.",
+      "expected": {
+        "person_name": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "skin-fact",
+      "group": "Skincare",
+      "kind": "lookup",
+      "question": "How many dermatological rules does the frozen Skincare Routine Auditor status explicitly say it evaluated? Return {\"rules_evaluated\": number}.",
+      "expected": {
+        "rules_evaluated": 6
+      },
+      "required_evidence": [
+        {
+          "source": "skincare-routine-auditor-48",
+          "position": 3,
+          "quote": "Evaluated 6 dermatological rules"
+        }
+      ]
+    },
+    {
+      "id": "skin-multi",
+      "group": "Skincare",
+      "kind": "multi_paragraph",
+      "question": "According to the frozen Skincare Routine Auditor, is SPF last in its AM flow sequence, and does it treat relying on SPF makeup alone as sufficient protection? Answer only about the page text, not medical advice. Return {\"spf_last_in_am\": boolean, \"makeup_spf_alone_sufficient\": boolean}.",
+      "expected": {
+        "spf_last_in_am": true,
+        "makeup_spf_alone_sufficient": false
+      },
+      "required_evidence": [
+        {
+          "source": "skincare-routine-auditor-48",
+          "position": 3,
+          "quote": "Cleanser → Actives → Moisture → SPF"
+        },
+        {
+          "source": "skincare-routine-auditor-48",
+          "position": 8,
+          "quote": "Thinking foundation or skin-tint with SPF 15 provides full solar defense"
+        }
+      ]
+    },
+    {
+      "id": "skin-unknown",
+      "group": "Skincare",
+      "kind": "unanswerable",
+      "question": "What named patient has a recorded confirmed allergy diagnosis in the frozen Skincare Routine Auditor sources? Return {\"patient_name\": string}, or null if no such patient is documented.",
+      "expected": {
+        "patient_name": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "deck-fact",
+      "group": "Command deck",
+      "kind": "lookup",
+      "question": "How many slots does the Command Deck Melder action deck support? Return {\"deck_slots\": number}.",
+      "expected": {
+        "deck_slots": 8
+      },
+      "required_evidence": [
+        {
+          "source": "command-deck-melder-88",
+          "position": 3,
+          "quote": "Active Command Deck (8 Slots)"
+        }
+      ]
+    },
+    {
+      "id": "deck-multi",
+      "group": "Command deck",
+      "kind": "multi_paragraph",
+      "question": "Using the Command Deck Melder snapshot, report Firaga’s described recharge time and the simulation dummy’s maximum HP. Return {\"firaga_recharge_seconds\": number, \"dummy_max_hp\": number}.",
+      "expected": {
+        "firaga_recharge_seconds": 12,
+        "dummy_max_hp": 2400
+      },
+      "required_evidence": [
+        {
+          "source": "command-deck-melder-88",
+          "position": 2,
+          "quote": "recharges in 12s"
+        },
+        {
+          "source": "command-deck-melder-88",
+          "position": 3,
+          "quote": "HP: 2400 / 2400"
+        }
+      ]
+    },
+    {
+      "id": "deck-unknown",
+      "group": "Command deck",
+      "kind": "unanswerable",
+      "question": "What exact damage number did the user’s most recent manual Firaga cast inflict? Use only the frozen Command Deck Melder source, not game knowledge. Return {\"last_cast_damage\": number}, or null if no cast result is recorded.",
+      "expected": {
+        "last_cast_damage": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "doc-fact",
+      "group": "Documentary",
+      "kind": "lookup",
+      "question": "In the frozen Documentary Release Modeler, how long is the Formal Right of Reply response window? Return {\"reply_window_days\": number}.",
+      "expected": {
+        "reply_window_days": 30
+      },
+      "required_evidence": [
+        {
+          "source": "documentary-release-risk-modeler-72",
+          "position": 4,
+          "quote": "30-day substantive response window"
+        }
+      ]
+    },
+    {
+      "id": "doc-multi",
+      "group": "Documentary",
+      "kind": "multi_paragraph",
+      "question": "In the Documentary Release Modeler snapshot, how many viability points does Boutique Division / Indie Re-licensing have above Full Theatrical & Day-and-Date Streaming? Return {\"viability_point_gap\": number}.",
+      "expected": {
+        "viability_point_gap": 28
+      },
+      "required_evidence": [
+        {
+          "source": "documentary-release-risk-modeler-72",
+          "position": 6,
+          "quote": "Viability 58 / 100"
+        },
+        {
+          "source": "documentary-release-risk-modeler-72",
+          "position": 7,
+          "quote": "Viability 86 / 100"
+        }
+      ]
+    },
+    {
+      "id": "doc-unknown",
+      "group": "Documentary",
+      "kind": "unanswerable",
+      "question": "What verified actual box-office gross did the modeled documentary earn after release? Do not substitute a projected pathway yield. Return {\"actual_gross_usd\": number}, or null if no actual gross is recorded.",
+      "expected": {
+        "actual_gross_usd": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "tribute-fact",
+      "group": "Tribute",
+      "kind": "lookup",
+      "question": "What total running time in minutes appears for the initial tribute revue in the frozen Tribute Concert Planner? Return {\"running_time_minutes\": number}.",
+      "expected": {
+        "running_time_minutes": 48.5
+      },
+      "required_evidence": [
+        {
+          "source": "tribute-concert-setlist-planner-48",
+          "position": 2,
+          "quote": "48.5 min"
+        }
+      ]
+    },
+    {
+      "id": "tribute-multi",
+      "group": "Tribute",
+      "kind": "multi_paragraph",
+      "question": "According to the Tribute Concert Planner text, what standard call time is used for stage timestamps and below how many minutes should speeches be capped? Return {\"standard_call_time_24h\": \"HH:MM\", \"speech_cap_under_minutes\": number}.",
+      "expected": {
+        "standard_call_time_24h": "20:00",
+        "speech_cap_under_minutes": 4
+      },
+      "required_evidence": [
+        {
+          "source": "tribute-concert-setlist-planner-48",
+          "position": 4,
+          "quote": "8:00 PM standard call time"
+        },
+        {
+          "source": "tribute-concert-setlist-planner-48",
+          "position": 3,
+          "quote": "speeches capped under 4 minutes"
+        }
+      ]
+    },
+    {
+      "id": "tribute-unknown",
+      "group": "Tribute",
+      "kind": "unanswerable",
+      "question": "How many tickets were actually sold for the tribute revue? Return {\"tickets_sold\": number}, or null if the frozen source does not document sales.",
+      "expected": {
+        "tickets_sold": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "prosthetic-fact",
+      "group": "Prosthetic",
+      "kind": "lookup",
+      "question": "How many lead SFX makeup artists are configured in the frozen Prosthetic Chair Optimizer? Return {\"lead_artists\": number}.",
+      "expected": {
+        "lead_artists": 3
+      },
+      "required_evidence": [
+        {
+          "source": "prosthetic-chair-optimizer-84",
+          "position": 1,
+          "quote": "3 Artists"
+        }
+      ]
+    },
+    {
+      "id": "prosthetic-multi",
+      "group": "Prosthetic",
+      "kind": "calculation",
+      "question": "Using the Prosthetic Chair Optimizer’s displayed Baseline Single Chair and Optimized Chair Time, how many minutes of chair time are removed? Return {\"chair_minutes_removed\": number}.",
+      "expected": {
+        "chair_minutes_removed": 291
+      },
+      "required_evidence": [
+        {
+          "source": "prosthetic-chair-optimizer-84",
+          "position": 3,
+          "quote": "5h 45m"
+        },
+        {
+          "source": "prosthetic-chair-optimizer-84",
+          "position": 3,
+          "quote": "0h 54m"
+        }
+      ]
+    },
+    {
+      "id": "prosthetic-unknown",
+      "group": "Prosthetic",
+      "kind": "unanswerable",
+      "question": "What is the full name of the lead makeup artist assigned to the optimizer’s current crew? Return {\"lead_artist_name\": string}, or null if the frozen source gives only counts or roles.",
+      "expected": {
+        "lead_artist_name": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "vehicle-fact",
+      "group": "Vehicle",
+      "kind": "lookup",
+      "question": "What track width in millimeters is displayed in the frozen Vehicle Packaging Studio? Return {\"track_width_mm\": number}.",
+      "expected": {
+        "track_width_mm": 1730
+      },
+      "required_evidence": [
+        {
+          "source": "vehicle-packaging-studio-72",
+          "position": 1,
+          "quote": "1730 mm"
+        }
+      ]
+    },
+    {
+      "id": "vehicle-multi",
+      "group": "Vehicle",
+      "kind": "multi_paragraph",
+      "question": "Use the Vehicle Packaging Studio’s displayed track width and CG height with its formula SSF = track / (2 * CG height). Return the result rounded to two decimal places as {\"calculated_ssf\": number}.",
+      "expected": {
+        "calculated_ssf": 1.59
+      },
+      "required_evidence": [
+        {
+          "source": "vehicle-packaging-studio-72",
+          "position": 1,
+          "quote": "1730 mm"
+        },
+        {
+          "source": "vehicle-packaging-studio-72",
+          "position": 3,
+          "quote": "545 mm"
+        },
+        {
+          "source": "vehicle-packaging-studio-72",
+          "position": 7,
+          "quote": "Static Stability Factor ($SSF"
+        }
+      ]
+    },
+    {
+      "id": "vehicle-unknown",
+      "group": "Vehicle",
+      "kind": "unanswerable",
+      "question": "What is the VIN of the physical car measured for the Vehicle Packaging Studio preset? Return {\"vin\": string}, or null if no VIN is documented.",
+      "expected": {
+        "vin": null
+      },
+      "required_evidence": []
+    },
+    {
+      "id": "orbit-refund",
+      "group": "Orbit",
+      "kind": "policy_exception",
+      "question": "Orbit customer: first paid subscription purchased 12 days ago, first refund, and no permission to cancel yet. Under the stored policy, are they within the refund window, and may support cancel without their confirmation? Return {\"within_refund_window\": boolean, \"cancel_without_confirmation\": boolean}.",
+      "expected": {
+        "within_refund_window": true,
+        "cancel_without_confirmation": false
+      },
+      "required_evidence": [
+        {
+          "source": "support.md",
+          "position": 0,
+          "quote": "Refunds are available within 14 days"
+        },
+        {
+          "source": "support.md",
+          "position": 1,
+          "quote": "must obtain the customer's confirmation"
+        }
+      ]
+    },
+    {
+      "id": "orbit-renewal",
+      "group": "Orbit",
+      "kind": "policy_exception",
+      "question": "An Orbit customer requests a refund of an annual renewal from two days ago. Can support promise automatic approval, and is support review required? Return {\"promise_automatic_approval\": boolean, \"support_review_required\": boolean}.",
+      "expected": {
+        "promise_automatic_approval": false,
+        "support_review_required": true
+      },
+      "required_evidence": [
+        {
+          "source": "support.md",
+          "position": 0,
+          "quote": "Annual renewals"
+        }
+      ]
+    },
+    {
+      "id": "orbit-price",
+      "group": "Orbit",
+      "kind": "calculation",
+      "question": "An Orbit workspace has seven paid Team collaborators. What is its monthly cost under the stored per-collaborator rate, and how many collaborators does the free plan support? Return {\"team_monthly_usd\": number, \"free_collaborators\": number}.",
+      "expected": {
+        "team_monthly_usd": 84,
+        "free_collaborators": 3
+      },
+      "required_evidence": [
+        {
+          "source": "support.md",
+          "position": 3,
+          "quote": "Team plan is $12"
+        }
+      ]
+    },
+    {
+      "id": "orbit-theme",
+      "group": "Orbit",
+      "kind": "multi_paragraph",
+      "question": "For an Orbit theme toggle, should an explicit choice persist in localStorage, should it follow prefers-color-scheme without an explicit choice, and must the toggle work by keyboard? Return {\"persist_local_storage\": boolean, \"fallback_system_theme\": boolean, \"keyboard_required\": boolean}.",
+      "expected": {
+        "persist_local_storage": true,
+        "fallback_system_theme": true,
+        "keyboard_required": true
+      },
+      "required_evidence": [
+        {
+          "source": "product.md",
+          "position": 2,
+          "quote": "localStorage"
+        },
+        {
+          "source": "product.md",
+          "position": 3,
+          "quote": "keyboard navigation"
+        }
+      ]
+    },
+    {
+      "id": "orbit-rollback",
+      "group": "Orbit",
+      "kind": "multi_paragraph",
+      "question": "Orbit error rates rise after a deployment involving a database change. Should the team restore the previous versioned image and verify the health endpoint? May they reverse the database migration without an explicit recovery plan? Return {\"restore_image_and_check_health\": boolean, \"reverse_migration_without_plan\": boolean}.",
+      "expected": {
+        "restore_image_and_check_health": true,
+        "reverse_migration_without_plan": false
+      },
+      "required_evidence": [
+        {
+          "source": "engineering.md",
+          "position": 1,
+          "quote": "restore that image and verify the health endpoint"
+        }
+      ]
+    },
+    {
+      "id": "orbit-offsite",
+      "group": "Orbit",
+      "kind": "calculation",
+      "question": "The Orbit offsite is in October and dietary requirements are due one month before departure. What city hosts it and what numbered month is the dietary deadline? Return {\"city\": string, \"dietary_deadline_month\": number}.",
+      "expected": {
+        "city": "Lisbon",
+        "dietary_deadline_month": 9
+      },
+      "required_evidence": [
+        {
+          "source": "engineering.md",
+          "position": 3,
+          "quote": "offsite is in Lisbon in October"
+        }
+      ]
+    },
+    {
+      "id": "orbit-digest",
+      "group": "Orbit",
+      "kind": "lookup",
+      "question": "At what local workspace time does Orbit send its daily digest, and can users opt out? Return {\"workspace_local_time\": \"HH:MM\", \"can_opt_out\": boolean}.",
+      "expected": {
+        "workspace_local_time": "09:00",
+        "can_opt_out": true
+      },
+      "required_evidence": [
+        {
+          "source": "engineering.md",
+          "position": 2,
+          "quote": "09:00 in each workspace"
+        }
+      ]
+    },
+    {
+      "id": "orbit-unknown",
+      "group": "Orbit",
+      "kind": "unanswerable",
+      "question": "What exact monthly USD price has Orbit negotiated for Acme Corporation’s Enterprise contract? Return {\"enterprise_monthly_usd\": number}, or null if no account-specific quote is stored.",
+      "expected": {
+        "enterprise_monthly_usd": null
+      },
+      "required_evidence": []
+    }
+  ]
+}
