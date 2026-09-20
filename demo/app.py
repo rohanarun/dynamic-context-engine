@@ -6,11 +6,13 @@ import threading
 import time
 from collections import deque
 from flask import Flask, jsonify, render_template, request
-from jev_context.engine import Engine, Store, ProviderError, DEFAULT_MAX_TOKENS, MAX_CONTEXT_TOKENS
+from jev_context.engine import Engine, Store, ProviderError, DEFAULT_MAX_TOKENS, MAX_CONTEXT_TOKENS, token_count
 
 HERE = Path(__file__).parent
 SAMPLE = json.loads((HERE / "sample.json").read_text())
 BASE = os.environ.get("CONTEXT_DEMO_PREFIX", "/demos/context-engine").rstrip("/")
+# Load the reference tokenizer before accepting the first visitor request.
+token_count("")
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 8192
 store = Store(os.environ.get("JEV_CONTEXT_DB", str(HERE / "sample.sqlite3")))
