@@ -142,7 +142,7 @@ This revised subset excludes `tribute-multi`, `prosthetic-multi`, and `vehicle-m
 
 This is a separate question-answering corpus, not the website-generation prompt benchmark above. It measures fidelity to frozen source text, not regenerated website quality. The revised report includes the fixture, every answer, source-evidence coverage, provider usage, and reproduction instructions. [View the live comparison](https://getsupers.com/demos/context-engine/#accuracy).
 
-![Revised 29-question subset, excluding three prior failures: full and dynamic context 100%, no context 31.0%; answer-model input reduced 96.1%.](demo/static/benchmark-accuracy-revised.png)
+![Revised 29-question subset, excluding three prior failures: full and dynamic context 100%, no context 31.0%; answer-model input reduced 96.1%.](demo/static/benchmark-accuracy.png)
 
 ## Parallel retrieval and timing
 

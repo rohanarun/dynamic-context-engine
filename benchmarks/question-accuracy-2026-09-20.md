@@ -6,7 +6,7 @@ This is a separate workload from the 14.8% website-generation-prompt replay: it 
 
 Dynamic accuracy on answerable questions alone was **20/23 (87.0%)**; all nine deliberately unanswerable questions were correctly answered with null in every arm.
 
-![Accuracy and average answer-model input for full, dynamic, and no-context arms.](../demo/static/benchmark-accuracy.png)
+![Accuracy and average answer-model input for full, dynamic, and no-context arms.](../demo/static/benchmark-accuracy-original.png)
 
 ## Results
 

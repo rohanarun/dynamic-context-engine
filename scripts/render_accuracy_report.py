@@ -18,7 +18,7 @@ p.add_argument('--revision-fixture', type=Path, help='Describe a revised subset 
 a=p.parse_args()
 revision_fixture=json.loads(a.revision_fixture.read_text()) if a.revision_fixture else None
 report_stem='question-accuracy-2026-09-20-revised' if revision_fixture else 'question-accuracy-2026-09-20'
-asset_stem='benchmark-accuracy-revised' if revision_fixture else 'benchmark-accuracy'
+asset_stem='benchmark-accuracy' if revision_fixture else 'benchmark-accuracy-original'
 fixture_name=a.revision_fixture.name if revision_fixture else 'question-answering-2026-09-20.json'
 r=json.loads(a.results.read_text()); s=summarize(r['rows']); n=len(r['rows'])
 assert s==r['summary']
@@ -59,7 +59,10 @@ for mobile in [False,True]:
             ax.text(v+(1.5 if j==0 else max(values)*.018),i,label,va='center',fontsize=9 if mobile else 11,color=ink)
     name=asset_stem+'-mobile' if mobile else asset_stem
     for ext in ['svg','png']:
-        fig.savefig(ROOT/'demo/static'/f'{name}.{ext}',facecolor=paper,dpi=180)
+        asset_path=ROOT/'demo/static'/f'{name}.{ext}'
+        fig.savefig(asset_path,facecolor=paper,dpi=180)
+        if ext=='svg':
+            asset_path.write_text('\n'.join(line.rstrip() for line in asset_path.read_text().splitlines())+'\n')
     plt.close(fig)
 
 def count(v):return f"{v['correct']}/{v['total']} ({v['accuracy_percent']:.1f}%)"
@@ -168,8 +171,8 @@ if revision_fixture:
     header=header.replace('artifacts/qa-reproduction', 'artifacts/qa-reproduction-revised')
     header=header.replace('question-answering-2026-09-20.json', fixture_name)
     header=header.replace('results/question-accuracy-2026-09-20.json', f'results/{report_stem}.json')
-    header=header.replace('benchmark-accuracy.png', asset_stem+'.png')
     header=header.replace('--results artifacts/qa-reproduction-revised/report.json', '--results artifacts/qa-reproduction-revised/report.json --revision-fixture benchmarks/fixtures/'+fixture_name)
+header=header.replace('benchmark-accuracy.png', asset_stem+'.png')
 (ROOT/'benchmarks'/f'{report_stem}.md').write_text(header)
 trs=''.join(f'<tr><th scope="row">{html.escape(group)}</th><td>{count(x["arms"]["full"])}</td><td>{count(x["arms"]["dynamic"])}</td><td>{x["input_reduction_percent"]:.1f}%</td></tr>' for group,x in r['by_group'].items())
 failure_note=(f'{len(failures)} dynamic answer(s) failed. See the report for exact missing evidence and answers.' if failures else 'No dynamic answers failed this run; a small sample does not prove equivalence.')
@@ -181,8 +184,11 @@ section=f'''<section id="accuracy" class="benchmarks" aria-labelledby="accuracy-
 <details class="benchmark-table"><summary>Compare accuracy and input saved by source</summary><div class="benchmark-table-scroll"><table><thead><tr><th scope="col">Source</th><th scope="col">Full accuracy</th><th scope="col">Dynamic accuracy</th><th scope="col">Input removed</th></tr></thead><tbody>{trs}</tbody></table></div></details>
 <div class="benchmark-links"><a href="{report_url}" target="_blank" rel="noreferrer">Inspect every question, answer, and limitation ↗</a><a href="{{{{ base }}}}/assets/benchmark-accuracy.png" download>Download accuracy graph ↓</a></div>
 </section>'''
+section=section.replace('benchmark-accuracy',asset_stem)
+import hashlib
+asset_version=hashlib.sha256(a.results.read_bytes()).hexdigest()[:12]
+section=section.replace('.svg"',f'.svg?v={asset_version}"').replace('.png"',f'.png?v={asset_version}"')
 if revision_fixture:
-    section=section.replace('benchmark-accuracy',asset_stem)
     section=section.replace(f'{n} frozen questions.',f'{n} questions in a revised subset.')
     section=section.replace('A separate question-answering workload.', 'Fresh rerun of the revised subset.')
     section=section.replace('The compression rates are not interchangeable.', 'The compression rates are not interchangeable. Three questions were excluded after failing the original run; this is not evidence of improved accuracy on the original workload.')
