@@ -1,0 +1,22 @@
+{
+  "title": "Dynamic Context Engine: An Empirical Study of Paragraph Selection, Token Cost, and Parallel Retrieval for AI Agents",
+  "authors": [
+    {
+      "name": "Rohan Arun",
+      "affiliation": "Super Powers AI"
+    }
+  ],
+  "abstract": "Dynamic Context Engine is an open-source middleware system that stores exact paragraphs in SQLite, uses Jev to estimate request-specific relevance, and assembles a source-tagged context within a token budget. We report three exploratory evaluations and a disclosed post-selection rerun. Replaying eight archived website-generation inputs reduced downstream input from 230,057 to 195,953 reference tokens (14.8%) while retaining 80 of 80 annotated required-paragraph instances; estimated uncached input cost decreased only 2.7% after selector cost. A separate 32-question source-grounded evaluation reduced answer-model input by 96.0%, but exact answer accuracy declined from 32/32 to 29/32. After removing those three failures at the project owner's request, a fresh 29-question rerun achieved 29/29 with both full and dynamic context and 96.1% less answer-model input. That post-selected result is not an independent estimate of general accuracy. In 81 cold retrieval measurements, increasing the worker limit from one to eight reduced median retrieval on the 78-paragraph prompt from 3.82 to 0.76 seconds. Twelve paired answer trials showed mixed complete-response latency and a worse dynamic-context tail. These observations distinguish context reduction, downstream correctness, selector overhead, and end-to-end performance. They support further controlled evaluation rather than a universal accuracy, cost, or latency guarantee.",
+  "suggested_primary_category": "cs.CL",
+  "suggested_cross_list": [
+    "cs.IR"
+  ],
+  "comments": "Technical white paper; source code, frozen evaluation fixtures, and measurement artifacts are publicly available. Includes an explicitly post-selected rerun.",
+  "license": null,
+  "submission_status": "not submitted; account login, author review, and license/agreement confirmation pending",
+  "code_url": "https://github.com/rohanarun/dynamic-context-engine",
+  "evidence_revision": "93f6020",
+  "ai_assistance_disclosed": true,
+  "pages": 9,
+  "figures": 3
+}

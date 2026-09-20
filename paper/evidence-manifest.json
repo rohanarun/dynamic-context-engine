@@ -1,0 +1,169 @@
+{
+  "code_revision": "93f6020",
+  "results": {
+    "benchmarks/results/website-replay-2026-09-20.json": "da6fa184118d2c97a2f341741873590bc57e6f47732e38420852b89cac1236de",
+    "benchmarks/results/question-accuracy-2026-09-20.json": "0c1fcb744961239bc677464f8fd41e80c2cdc589b69b8840cb55a694fee6cdfd",
+    "benchmarks/results/question-accuracy-2026-09-20-revised.json": "f9a28319d3d3a308c567d123b09fade8dd49d73d6baebf8050bae75118afae2a",
+    "benchmarks/results/latency-2026-09-20.json": "e6e2057f4b063c22e3630e6f28a687db71ee148fd793e310bb3b30b1f058096b"
+  },
+  "website_full_input": 230057,
+  "website_dynamic_input": 195953,
+  "original_summary": {
+    "arms": {
+      "full": {
+        "correct": 32,
+        "total": 32,
+        "accuracy_percent": 100.0,
+        "wilson_95_percent": [
+          89.28208017449293,
+          100.0
+        ],
+        "errors": 0,
+        "reference_input_tokens": 278239,
+        "provider_usage": {
+          "prompt_tokens": 300539,
+          "completion_tokens": 8167,
+          "total_tokens": 308706
+        },
+        "super_credits_used": 0,
+        "super_cache_hits": 0
+      },
+      "dynamic": {
+        "correct": 29,
+        "total": 32,
+        "accuracy_percent": 90.625,
+        "wilson_95_percent": [
+          75.78184527161213,
+          96.75984487016336
+        ],
+        "errors": 0,
+        "reference_input_tokens": 11232,
+        "provider_usage": {
+          "prompt_tokens": 12006,
+          "completion_tokens": 9892,
+          "total_tokens": 21898
+        },
+        "super_credits_used": 0,
+        "super_cache_hits": 0
+      },
+      "no_context": {
+        "correct": 9,
+        "total": 32,
+        "accuracy_percent": 28.125,
+        "wilson_95_percent": [
+          15.564580497742764,
+          45.374509425916564
+        ],
+        "errors": 0,
+        "reference_input_tokens": 4831,
+        "provider_usage": {
+          "prompt_tokens": 5051,
+          "completion_tokens": 5562,
+          "total_tokens": 10613
+        },
+        "super_credits_used": 0,
+        "super_cache_hits": 0
+      }
+    },
+    "input_tokens_removed": 267007,
+    "input_reduction_percent": 95.96318273139279,
+    "context_tokens_full": 273504,
+    "context_tokens_dynamic": 6470,
+    "accuracy_delta_percentage_points": -9.375,
+    "paired": {
+      "both_correct": 29,
+      "full_only_correct": 3,
+      "dynamic_only_correct": 0,
+      "both_wrong": 0
+    },
+    "evidence": {
+      "retained": 28,
+      "total": 32,
+      "all_required_retained_cases": 19,
+      "answerable_cases": 23
+    },
+    "jev_usage": {
+      "input_tokens": 823730,
+      "output_tokens": 74496
+    }
+  },
+  "revised_summary": {
+    "arms": {
+      "full": {
+        "correct": 29,
+        "total": 29,
+        "accuracy_percent": 100.0,
+        "wilson_95_percent": [
+          88.30302015002593,
+          100.0
+        ],
+        "errors": 0,
+        "reference_input_tokens": 252143,
+        "provider_usage": {
+          "prompt_tokens": 272352,
+          "completion_tokens": 6822,
+          "total_tokens": 279174
+        },
+        "super_credits_used": 0,
+        "super_cache_hits": 0
+      },
+      "dynamic": {
+        "correct": 29,
+        "total": 29,
+        "accuracy_percent": 100.0,
+        "wilson_95_percent": [
+          88.30302015002593,
+          100.0
+        ],
+        "errors": 0,
+        "reference_input_tokens": 9748,
+        "provider_usage": {
+          "prompt_tokens": 10402,
+          "completion_tokens": 9622,
+          "total_tokens": 20024
+        },
+        "super_credits_used": 0,
+        "super_cache_hits": 0
+      },
+      "no_context": {
+        "correct": 9,
+        "total": 29,
+        "accuracy_percent": 31.03448275862069,
+        "wilson_95_percent": [
+          17.275616744483216,
+          49.23013423309317
+        ],
+        "errors": 0,
+        "reference_input_tokens": 4367,
+        "provider_usage": {
+          "prompt_tokens": 4566,
+          "completion_tokens": 4073,
+          "total_tokens": 8639
+        },
+        "super_credits_used": 0,
+        "super_cache_hits": 0
+      }
+    },
+    "input_tokens_removed": 242395,
+    "input_reduction_percent": 96.13393986745616,
+    "context_tokens_full": 247863,
+    "context_tokens_dynamic": 5441,
+    "accuracy_delta_percentage_points": 0.0,
+    "paired": {
+      "both_correct": 29,
+      "full_only_correct": 0,
+      "dynamic_only_correct": 0,
+      "both_wrong": 0
+    },
+    "evidence": {
+      "retained": 25,
+      "total": 26,
+      "all_required_retained_cases": 19,
+      "answerable_cases": 20
+    },
+    "jev_usage": {
+      "input_tokens": 746435,
+      "output_tokens": 67512
+    }
+  }
+}

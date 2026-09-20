@@ -121,6 +121,10 @@ For semantic failures, revise `policy.json` or pass `query --policy custom-polic
 
 Contributions are welcome through issues and pull requests. Keep credentials, local databases, and private context out of commits.
 
+## Technical white paper
+
+[Read the nine-page white paper](output/pdf/dynamic-context-engine-white-paper.pdf) by **Rohan Arun, Super Powers AI**, covering all four result sets, architecture, selector-inclusive cost, accuracy failures, and latency. The original 32-question evaluation and the revised post-selected subset are reported separately. [LaTeX source and arXiv package](paper/README.md). This is a pre-submission manuscript; it has not been published on arXiv.
+
 ## Website-generation benchmark
 
 [Eight real archived website requests](benchmarks/website-replay-2026-09-20.md): at the default cutoff, generation-input tokens fell **14.8%**, but estimated net input cost fell only **2.7%** after Jev. All 80 pre-registered required-paragraph checks passed. A higher cutoff saved more but dropped required context; cached-prompt comparisons were more expensive. This is an input-only replay, not proof of equivalent generated output or invoice savings. The report includes a reusable harness, public result data, price sources, and limitations.
