@@ -49,6 +49,8 @@ Run only the commands for agents you use. Each installation contains its own eng
 | Claude Code | `~/.claude/skills/dynamic-context` | Invoke `/dynamic-context` |
 | Hermes | `~/.hermes/skills/dynamic-context` | Ask the agent to use the dynamic-context skill |
 
+A ready-to-copy [skill ZIP](https://github.com/rohanarun/dynamic-context-engine/releases/latest/download/dynamic-context-skill.zip) is also available. Extract its `dynamic-context` folder into your agent's skills directory. To rebuild it from source, run `python3 scripts/build_skill.py`.
+
 The same [SKILL.md](skills/dynamic-context/SKILL.md) works across all three. Paths follow the official [Codex](https://developers.openai.com/codex/skills/), [Claude Code](https://code.claude.com/docs/en/skills), and [Hermes](https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills) skill conventions. Start a fresh agent session if its skill list does not refresh.
 
 For consistent retrieval, add this instruction to the appropriate project guidance (`AGENTS.md`, `CLAUDE.md`, or your Hermes instructions), replacing `my-project`:
