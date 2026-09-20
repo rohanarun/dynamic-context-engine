@@ -2,7 +2,7 @@
 
 **A paragraph memory that chooses context for the request in front of your agent.**
 
-[Live playground](https://getsupers.com/demos/context-engine/) · [TypeSafe API](https://docs.typesafe.ai/api) · [MIT license](LICENSE)
+[White paper (PDF)](https://getsupers.com/demos/context-engine/assets/dynamic-context-engine-white-paper.pdf) · [Live playground](https://getsupers.com/demos/context-engine/) · [TypeSafe API](https://docs.typesafe.ai/api) · [MIT license](LICENSE)
 
 Store project notes, preferences, or documentation in SQLite. At request time, Jev evaluates each paragraph's relevance, then the engine combines the useful paragraphs into a size-bounded, source-tagged context. No embeddings, vector database, keyword rules, or generative rewriting. The engine uses SQLite and tiktoken for explicit token budgeting.
 
